@@ -1,0 +1,289 @@
+.our_box {
+  margin-top: 130px;
+  margin-bottom: 90px;
+}
+@media screen and (max-width: 750px) {
+  .our_box {
+    margin-bottom: 32px;
+    margin-top: 100px;
+  }
+}
+.our_box .our_ban {
+  position: relative;
+  margin-bottom: 80px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban {
+    margin-bottom: 32px;
+  }
+}
+.our_box .our_ban .ob_bg img {
+  width: 1899px;
+  height: 495px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_bg {
+    display: none;
+  }
+}
+.our_box .our_ban .ob_mbg {
+  display: none;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_mbg {
+    display: block;
+  }
+}
+.our_box .our_ban .ob_con {
+  position: absolute;
+  /*top: 4%;*/
+  top: 74px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 600px;
+  height: 352px;
+  padding: 48px 57px;
+  box-sizing: border-box;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con {
+    width: 335px;
+    height: 350px;
+    /*left: 20px;*/
+    left: 50%;
+    top: 218px;
+    padding: 32px 0;
+    transform: translate(-50%);
+  }
+}
+.our_box .our_ban .ob_con .oc_tit {
+  color: #FFF;
+  font-family: Alimama ShuHeiTi;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_tit {
+    text-align: center;
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+.our_box .our_ban .ob_con .oc_no {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: #FFF;
+  font-family: PingFang SC;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_no {
+    margin-top: 32px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+.our_box .our_ban .ob_con .oc_tag {
+  width: 443px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_tag {
+    width: 180px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+.our_box .our_ban .ob_con .oc_tag .oct_item {
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.16);
+  padding: 4px 16px;
+  box-sizing: border-box;
+  color: #FFF;
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_tag .oct_item {
+    padding: 4px 16px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+.our_box .our_ban .ob_con .oc_btns {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.our_box .our_ban .ob_con .oc_btns .b_hezuo {
+  display: block;
+  margin-right: 32px;
+  width: 184px;
+  height: 56px;
+  padding: 16px 26px;
+  box-sizing: border-box;
+  border-radius: 45px;
+  background: #FFF;
+  color: #794EFF;
+  font-family: PingFang SC;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_btns .b_hezuo {
+    width: 148px;
+    height: 40px;
+    padding: 11px 32px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+.our_box .our_ban .ob_con .oc_btns .b_shenqing {
+  position: relative;
+  width: 184px;
+  height: 56px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_btns .b_shenqing {
+    width: 132px;
+    height: 40px;
+  }
+}
+.our_box .our_ban .ob_con .oc_btns .b_shenqing .b_sq_con {
+  display: block;
+  width: 184px;
+  height: 56px;
+  padding: 16px 32px;
+  box-sizing: border-box;
+  border-radius: 45px;
+  color: #FFF;
+  font-family: PingFang SC;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  position: absolute;
+  top: 0;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_ban .ob_con .oc_btns .b_shenqing .b_sq_con {
+    width: 132px;
+    height: 40px;
+    padding: 11px 24px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+.our_box .our_sch {
+  width: 1200px;
+  gap: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch {
+    width: auto;
+    margin: 0 20px;
+    /*height: 1040px;*/
+  }
+}
+.our_box .our_sch .os_item {
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.04);
+}
+.our_box .our_sch .os_item:hover {
+  box-shadow: 0px 8px 32px 0px rgba(121, 78, 255, 0.08);
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item {
+    padding: 0;
+  }
+}
+.our_box .our_sch .os_item .osi_img {
+  margin-bottom: 24px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item .osi_img {
+    margin-bottom: 16px;
+  }
+}
+.our_box .our_sch .os_item .osi_img img {
+  width: 530px;
+  height: 294px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item .osi_img img {
+    width: 100%;
+    height: 55%;
+    border-radius: 8px;
+  }
+}
+.our_box .our_sch .os_item .osi_text {
+  display: flex;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item .osi_text {
+    margin-bottom: 16px;
+    margin-left: 20px;
+  }
+}
+.our_box .our_sch .os_item .osi_text .osit_name {
+  color: var(--333333, #333);
+  font-family: PingFang SC;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  margin-right: 8px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item .osi_text .osit_name {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+.our_box .our_sch .os_item .osi_text .osit_tag {
+  color: #794EFF;
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: 8px;
+  background: rgba(121, 78, 255, 0.1);
+  display: flex;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 10px;
+}
+@media screen and (max-width: 750px) {
+  .our_box .our_sch .os_item .osi_text .osit_tag {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
