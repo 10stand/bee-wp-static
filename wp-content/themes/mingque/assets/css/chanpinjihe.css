@@ -1,0 +1,70 @@
+.them_anniu {
+    margin-top: 31px;
+}
+
+.them_content {
+    padding-bottom: 10px;
+
+}
+
+.them_yiping {
+    border-bottom: 1px dashed #B7B7B7;
+    margin-bottom: 21px;
+}
+
+.them_gdchanpinxianmokuai {
+    margin-top: 22px;
+    border-top: 1px dashed #B7B7B7;
+    padding-top: 17px;
+}
+
+.them_erping .them_content_left {
+    border-right: 1px dashed #B7B7B7;
+    padding-right: 15px;
+}
+
+.them_erping {
+    padding-bottom: 23px;
+}
+
+.them_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.them_content.them_sanping,
+.them_content.them_wuping {
+    display: block;
+}
+
+.them_sanping .them_biaoti,
+.them_siping .them_biaoti,
+.them_wuping .them_biaoti {
+    border-bottom: 1px dashed #B7B7B7;
+}
+
+.them_sanping .them_biaoti,
+.them_siping .them_biaoti,
+.them_wuping .them_biaoti {
+    width: 100%;
+    padding-bottom: 34px;
+}
+
+.them_siping .them_kapian2 {
+    margin-top: 35px;
+}
+
+.anniu1 {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px dashed #B7B7B7;
+}
+
+/* 切换卡片 */
+.them_qhkp {
+    margin-top: 27px;
+}
+
+.them_siping {
+    display: block !important;
+}
