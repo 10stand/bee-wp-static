@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Alimama ShuHeiTi';
-  src: url('../../font/Alimama_ShuHeiTi_Bold.ttf');
+  src: url('/wp-content/themes/mingque/assets/font/Alimama_ShuHeiTi_Bold.ttf');
 }
 header {
   height: auto;
