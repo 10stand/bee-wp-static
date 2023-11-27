@@ -1977,7 +1977,7 @@ body {
   width: 400px;
   height: 404px;
   border-radius: 16px;
-  background-image: url(../image/bg_contact.png);
+  background-image: url(/wp-content/themes/mingque/assets/index/image/bg_contact.png);
   margin-right: 40px;
 }
 @media screen and (max-width: 750px) {
@@ -1987,7 +1987,7 @@ body {
     margin-bottom: 20px;
     width: auto;
     height: 160px;
-    background-image: url(../image/m_home_bg_contact.png);
+    background-image: url(/wp-content/themes/mingque/assets/index/image/m_home_bg_contact.png);
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -2072,7 +2072,7 @@ body {
   width: 760px;
   height: 404px;
   flex-shrink: 0;
-  background-image: url(../image/bg.png);
+  background-image: url(/wp-content/themes/mingque/assets/index/image/bg.png);
   border-radius: 20px;
 }
 @media screen and (max-width: 750px) {
@@ -2082,7 +2082,7 @@ body {
     margin-right: 20px;
     overflow: hidden;
     height: 184px;
-    background-image: url(../image/m_home_bg_apply.png);
+    background-image: url(/wp-content/themes/mingque/assets/index/image/m_home_bg_apply.png);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
