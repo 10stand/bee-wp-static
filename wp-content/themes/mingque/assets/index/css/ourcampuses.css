@@ -234,6 +234,8 @@
 .our_box .our_sch .os_item .osi_img img {
   width: 530px;
   height: 294px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 @media screen and (max-width: 750px) {
   .our_box .our_sch .os_item .osi_img img {

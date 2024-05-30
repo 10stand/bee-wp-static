@@ -1,0 +1,435 @@
+.luodi_box .luodi_box_nav {
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_box_nav {
+    top: 10px;
+  }
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_left {
+  margin-left: 40px;
+  width: 140px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 6px 16px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_box_nav .luodi_box_nav_left {
+    margin-left: 10px;
+  }
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_left img {
+  width: 140px;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right {
+  margin-right: 40px;
+  position: relative;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_box_nav .luodi_box_nav_right {
+    margin-right: 10px;
+  }
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #fff;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_select .luodi_box_nav_rs_diqiu img {
+  width: 14px;
+  height: 14px;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_select .luodi_box_nav_rs_text {
+  font-family: PingFang SC;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  color: #7939FF;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_select .luodi_box_nav_rs_jiantou img {
+  width: 12px;
+  height: 12px;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_option {
+  display: none;
+  margin-top: 4px;
+  position: absolute;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_option .luodi_box_nav_ro_item {
+  width: 114px;
+  height: 34px;
+  font-family: PingFang SC;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fff;
+}
+.luodi_box .luodi_box_nav .luodi_box_nav_right .luodi_box_nav_r_option .luodi_box_nav_ro_item:hover {
+  background: #794EFF1A;
+}
+.luodi_box .luodi_top {
+  position: relative;
+  height: 640px;
+  overflow: hidden;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top {
+    height: auto;
+  }
+}
+.luodi_box .luodi_top .luodi_t_bg {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_bg .luodi_t_bg_pc {
+    display: none;
+  }
+}
+.luodi_box .luodi_top .luodi_t_bg .luodi_t_bg_mb {
+  display: none;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_bg .luodi_t_bg_mb {
+    display: block;
+  }
+}
+.luodi_box .luodi_top .luodi_t_bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.luodi_box .luodi_top .luodi_t_con {
+  width: 1200px;
+  margin: 112px auto 0;
+  position: relative;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con {
+    width: 345px;
+    margin: 68px auto;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_title {
+  font-family: PingFang SC;
+  font-size: 64px;
+  font-weight: bold;
+  line-height: 72px;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_title .xi {
+  font-weight: 300;
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_title .purple {
+  color: #794EFF;
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_list {
+  width: 530px;
+  margin: 48px auto;
+  font-family: Alimama ShuHeiTi;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_list .luodi_tc_list_pc {
+    display: none;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_list .luodi_tc_list_mb {
+  display: none;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_list .luodi_tc_list_mb {
+    display: block;
+  }
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_list {
+    width: 315px;
+    margin: 24px auto;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  font-family: PingFang SC;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_btns {
+    gap: 16px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_apply {
+  width: 235px;
+  height: 56px;
+  text-align: center;
+  line-height: 56px;
+  border-radius: 50px;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_apply:hover {
+  box-shadow: 0 2px 23px 0 #6740E0;
+  transition: all 0.3s;
+  transform: translateY(-2px);
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_apply {
+    width: 166px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_apply .luodi_tcba_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_hezuo {
+  padding: 16px 32px;
+  border: 1px solid #7051EB;
+  border-radius: 45px;
+  cursor: pointer;
+  color: #7051EB;
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_hezuo:hover {
+  box-shadow: 0 2px 23px 0 #6740E0;
+  transition: all 0.3s;
+  transform: translateY(-2px);
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_btns .luodi_tcb_hezuo {
+    padding: 11px 24px;
+    border-radius: 32px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_l_star {
+  position: absolute;
+  left: 100px;
+  top: 120px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_l_star {
+    left: -10px;
+    top: 125px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_l_star img {
+  width: 60px;
+  height: 60px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_l_star img {
+    width: 30px;
+    height: 30px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_r_star {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_r_star {
+    right: -5px;
+    top: 50px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_r_star img {
+  width: 50px;
+  height: 50px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_r_star img {
+    width: 24px;
+    height: 24px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_b_star {
+  position: absolute;
+  right: 250px;
+  top: 250px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_b_star {
+    right: 15px;
+    top: 220px;
+  }
+}
+.luodi_box .luodi_top .luodi_t_con .luodi_tc_b_star img {
+  width: 32px;
+  height: 32px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_top .luodi_t_con .luodi_tc_b_star img {
+    width: 20px;
+    height: 20px;
+  }
+}
+.luodi_box .luodi_choose .disanping_bgc {
+  background: transparent;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_choose .disanping_bgc .disanping {
+    margin-top: 0;
+  }
+}
+.luodi_box .luodi_choose .disanping_bgc .disanping .san_line {
+  background: #7939FF;
+}
+.luodi_box .luodi_apply .disiping .si_line {
+  background: #7939FF;
+}
+.luodi_box .luodi_bom {
+  height: 156px;
+  position: relative;
+  overflow: hidden;
+}
+.luodi_box .luodi_bom .luodi_b_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_bom .luodi_b_bg .luodi_b_bg_pc {
+    display: none;
+  }
+}
+.luodi_box .luodi_bom .luodi_b_bg .luodi_b_bg_mb {
+  display: none;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_bom .luodi_b_bg .luodi_b_bg_mb {
+    display: block;
+  }
+}
+.luodi_box .luodi_bom .luodi_b_bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.luodi_box .luodi_bom .luodi_b_con {
+  margin-top: 32px;
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_text {
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_text a {
+  border-bottom: 1px solid #000;
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns {
+    gap: 15px;
+    font-size: 14px;
+  }
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_apply {
+  padding: 12px 48px;
+  background: #7939FF;
+  border-radius: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_apply:hover {
+  box-shadow: 0 2px 23px 0 #6740E0;
+  transition: all 0.3s;
+  transform: translateY(-2px);
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_apply {
+    padding: 9px 52px;
+  }
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_hezuo {
+  padding: 12px 48px;
+  background: #fff;
+  border-radius: 24px;
+  color: #7939FF;
+  cursor: pointer;
+}
+.luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_hezuo:hover {
+  box-shadow: 0 2px 23px 0 #6740E0;
+  transition: all 0.3s;
+  transform: translateY(-2px);
+}
+@media screen and (max-width: 750px) {
+  .luodi_box .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_hezuo {
+    padding: 9px 52px;
+  }
+}
+.luodi_box_en .luodi_top .luodi_t_con .luodi_tc_list {
+  width: 930px;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box_en .luodi_top .luodi_t_con .luodi_tc_list {
+    width: 325px;
+  }
+}
+.luodi_box_en .disiping .si_block .si_item {
+  align-items: flex-start;
+  height: auto;
+}
+@media screen and (max-width: 750px) {
+  .luodi_box_en .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_apply {
+    padding: 9px 38px;
+  }
+  .luodi_box_en .luodi_bom .luodi_b_con .luodi_bc_btns .luodi_bcb_hezuo {
+    padding: 9px 30px;
+  }
+}
