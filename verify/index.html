@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/wp-content/themes/mingque/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>证书验证 | Beecoming</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/reset.css?ver=1.1">
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/footer.css?ver=1.1">
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/header.css?ver=1.1">
+  <script src="/wp-content/themes/mingque/assets/JQuery.js?ver=1.1"></script>
+  <style>
+    @media screen and (max-width:750px){body{min-width:0}}
+
+    :root {
+      --p:#5B4EFF; --p-d:#4538e0; --p-l:#EEF2FF;
+      --text:#1A1A2E; --sub:#6B7280;
+      --bdr:#E5E7EB; --off:#F9FAFB; --white:#FFFFFF;
+    }
+
+    body { background:#F9FAFB; font-family:'PingFang SC','Helvetica Neue',Arial,sans-serif; }
+
+    /* ── PAGE LAYOUT ── */
+    .vy-page {
+      min-height: calc(100vh - 200px);
+      padding: 200px 24px 80px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    @media(max-width:700px){
+      .vy-page { padding-top: 101px; }
+    }
+
+    /* ── HERO HEADING ── */
+    .vy-hero { text-align:center; margin-bottom:48px; }
+    .vy-hero-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--p-l); color:var(--p);
+      font-size:12px; font-weight:600; padding:5px 12px;
+      border-radius:20px; margin-bottom:16px;
+      letter-spacing:.04em;
+    }
+    .vy-hero h1 {
+      font-size:32px; font-weight:800; color:var(--text);
+      margin-bottom:10px; line-height:1.25;
+    }
+    .vy-hero p { font-size:15px; color:var(--sub); line-height:1.6; }
+
+    /* ── SEARCH BOX ── */
+    .vy-search-wrap {
+      width:100%; max-width:560px;
+      box-sizing:border-box;
+      background:var(--white); border-radius:16px;
+      box-shadow:0 4px 24px rgba(91,78,255,.1);
+      padding:32px; margin-bottom:32px;
+    }
+    .vy-search-label {
+      font-size:13px; font-weight:600; color:var(--text);
+      margin-bottom:10px; display:block;
+    }
+    .vy-search-row { display:flex; gap:10px; }
+    .vy-input {
+      flex:1; height:48px; border:1.5px solid var(--bdr);
+      border-radius:10px; padding:0 16px;
+      font-size:15px; color:var(--text);
+      outline:none; transition:border-color .2s;
+      font-family:inherit; letter-spacing:.05em;
+    }
+    .vy-input:focus { border-color:var(--p); box-shadow:0 0 0 3px rgba(91,78,255,.1); }
+    .vy-input::placeholder { color:#B0B8C1; }
+    .vy-btn {
+      height:48px; padding:0 24px;
+      background:var(--p); color:#fff;
+      border:none; border-radius:10px;
+      font-size:14px; font-weight:700;
+      cursor:pointer; transition:all .18s;
+      white-space:nowrap; font-family:inherit;
+    }
+    .vy-btn:hover { background:var(--p-d); transform:translateY(-1px); }
+    .vy-hint { font-size:12px; color:var(--sub); margin-top:10px; }
+
+    /* ── RESULT AREA ── */
+    .vy-result { width:100%; max-width:560px; }
+
+    /* error */
+    .vy-error {
+      background:#FEF2F2; border:1.5px solid #FECACA;
+      border-radius:14px; padding:20px 24px;
+      display:flex; align-items:center; gap:14px;
+      animation: fadeIn .3s ease;
+    }
+    .vy-error-icon {
+      width:40px; height:40px; border-radius:50%;
+      background:#FEE2E2; display:flex; align-items:center;
+      justify-content:center; flex-shrink:0;
+    }
+    .vy-error-title { font-size:14px; font-weight:700; color:#DC2626; margin-bottom:3px; }
+    .vy-error-sub { font-size:12px; color:#EF4444; }
+
+    /* success card */
+    .vy-cert {
+      background:var(--white); border-radius:16px;
+      border:2px solid var(--p-l);
+      box-shadow:0 8px 32px rgba(91,78,255,.12);
+      overflow:hidden; animation:fadeIn .4s ease;
+    }
+    .vy-cert-header {
+      background:linear-gradient(135deg,var(--p) 0%,#7C6FFF 100%);
+      padding:20px 24px; display:flex; align-items:center; gap:14px;
+    }
+    .vy-cert-check {
+      width:44px; height:44px; background:rgba(255,255,255,.2);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .vy-cert-check svg { width:22px; height:22px; }
+    .vy-cert-header-text { color:#fff; }
+    .vy-cert-header-title { font-size:16px; font-weight:800; margin-bottom:2px; }
+    .vy-cert-header-sub { font-size:12px; opacity:.8; }
+
+    .vy-cert-body { padding:24px; }
+    .vy-cert-row {
+      display:flex; align-items:flex-start; gap:10px;
+      padding:10px 0; border-bottom:1px solid var(--bdr);
+    }
+    .vy-cert-row:last-child { border-bottom:none; padding-bottom:0; }
+    .vy-cert-key {
+      font-size:11px; font-weight:600; color:var(--sub);
+      letter-spacing:.06em; text-transform:uppercase;
+      min-width:90px; padding-top:2px;
+    }
+    .vy-cert-val { font-size:14px; color:var(--text); font-weight:500; line-height:1.5; }
+    .vy-cert-val strong { color:var(--p); }
+
+    .vy-cert-footer {
+      background:var(--off); border-top:1px solid var(--bdr);
+      padding:14px 24px; display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:8px;
+    }
+    .vy-cert-num { font-size:12px; color:var(--sub); font-family:monospace; }
+    .vy-cert-valid {
+      display:inline-flex; align-items:center; gap:5px;
+      background:#DCFCE7; color:#16A34A;
+      font-size:11px; font-weight:700; padding:4px 10px;
+      border-radius:20px; letter-spacing:.04em;
+    }
+
+    /* idle state */
+    .vy-idle {
+      text-align:center; padding:32px 20px;
+      background:var(--white); border-radius:14px;
+      border:1.5px dashed var(--bdr); color:var(--sub);
+      font-size:13px; line-height:1.6;
+      animation:fadeIn .3s ease;
+    }
+    .vy-idle-icon { font-size:32px; margin-bottom:10px; }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(8px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    @media(max-width:600px){
+      .vy-page { padding:100px 16px 60px; }
+      .vy-hero h1 { font-size:24px; }
+      .vy-search-wrap { padding:22px 18px; }
+      .vy-search-row { flex-direction:column; }
+      .vy-btn { height:44px; }
+      .vy-input { height:44px; }
+      .vy-cert-key { min-width:70px; font-size:10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER (copied from site) -->
+  <header>
+    <div class="h_box hea_sw">
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333V10L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+      <div class="item"><div class="line"></div><span>Beecoming美国大学少年班 2026秋季</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+    </div>
+    <div class="h_tab">
+      <div class="tab_ll">
+        <div class="tab_left" style="width:214px;height:40px;">
+          <a href="/"><img src="/wp-content/themes/mingque/assets/index/image/logo.png" alt="Beecoming"></a>
+        </div>
+        <div class="tab_con">
+          <a href="/"><span>首页</span></a>
+          <a href="/campus"><span>我们的校区</span></a>
+          <a href="/admits"><span>升学成果</span></a>
+          <a href="/about"><span>关于我们</span></a>
+          <a href="/verify"><span>证书认证</span></a>
+        </div>
+      </div>
+      <div class="tab_right">
+        <a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span>立即申请</span></a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none"><g clip-path="url(#clip0_v)"><path d="M15.457 4.92383L19.6367 9.10352C20.125 9.5918 20.125 10.3828 19.6367 10.8711L15.4375 15.0703C15.4062 15.1016 15.3574 15.1016 15.3262 15.0703L14.5527 14.2969C14.5215 14.2656 14.5215 14.2168 14.5527 14.1856L17.9844 10.7539C18.0332 10.7051 17.998 10.6211 17.9297 10.6211H0.078125C0.0351562 10.6211 0 10.5859 0 10.543V9.44922C0 9.40626 0.0351562 9.3711 0.078125 9.3711H17.9512C18.0215 9.3711 18.0547 9.28711 18.0059 9.23829L14.5742 5.80665C14.543 5.7754 14.543 5.72657 14.5742 5.69532L15.3477 4.92188C15.377 4.89258 15.4277 4.89258 15.457 4.92383Z" fill="#794EFF"></path></g><defs><clippath id="clip0_v"><rect width="20" height="20" fill="white"></rect></clippath></defs></svg>
+      </div>
+    </div>
+    <div class="hb_box">
+      <div class="item"><div class="line"></div><span>Beecoming 美国少年班课程 2026</span><div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewbox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg></div><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a><div class="line"></div></div>
+    </div>
+    <div class="hb_tab">
+      <div class="hbt_icon">
+        <div class="open"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"><rect y="3" width="24" height="2" fill="black"></rect><rect y="11" width="24" height="2" fill="black"></rect><rect y="19" width="24" height="2" fill="black"></rect></svg></div>
+        <div class="close"><svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="btn_nav"><rect x="4.22168" y="2.80762" width="24" height="2" transform="rotate(45 4.22168 2.80762)" fill="black"></rect><rect x="2.80762" y="19.7783" width="24" height="2" transform="rotate(-45 2.80762 19.7783)" fill="black"></rect></g></svg></div>
+        <img src="/wp-content/themes/mingque/assets/index/image/m_logo.png" alt="Beecoming">
+      </div>
+      <a href="https://www.wjx.cn/vm/tiV2Uw4.aspx" class="hbt_btn">立即申请 →</a>
+    </div>
+    <div class="hb_nav">
+      <a href="/" class="nbn_item">首页<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none"><path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path></svg></a>
+      <a href="/campus" class="nbn_item">我们的校区<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none"><path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path></svg></a>
+      <a href="/admits" class="nbn_item">升学成果<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none"><path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path></svg></a>
+      <a href="/about" class="nbn_item">关于我们<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none"><path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path></svg></a>
+      <a href="/verify" class="nbn_item">证书认证<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none"><path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path></svg></a>
+    </div>
+    <script>jQuery(function($){
+      const url=window.location.href;
+      if(url.includes('campus'))$('.h_tab .tab_con span')[1].classList.add('purple');
+      else if(url.includes('admits'))$('.h_tab .tab_con span')[2].classList.add('purple');
+      else if(url.includes('about'))$('.h_tab .tab_con span')[3].classList.add('purple');
+      else if(url.includes('verify'))$('.h_tab .tab_con span')[4].classList.add('purple');
+      else $('.h_tab .tab_con span')[0].classList.add('purple');
+    })</script>
+    <script>jQuery(function($){
+      $('.hb_tab .hbt_icon').click(function(){
+        if($('.hb_nav').css('display')==='none'||$('.hb_nav').css('display')===''){
+          $('.hb_tab .hbt_icon .open').css('display','none');
+          $('.hb_tab .hbt_icon .close').css('display','block');
+          $('.hb_nav').css('display','flex');
+        } else {
+          $('.hb_tab .hbt_icon .open').css('display','block');
+          $('.hb_tab .hbt_icon .close').css('display','none');
+          $('.hb_nav').css('display','none');
+        }
+      });
+      $(document).click(function(e){
+        if(!$(e.target).closest('.hb_tab').length)$('.hb_nav').css('display','none');
+      });
+    })</script>
+    <div class="zz"></div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="vy-page">
+
+    <div class="vy-hero">
+      <div class="vy-hero-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.73 4.51L12.66 5.07L9.83 7.83L10.46 11.75L7 9.93L3.54 11.75L4.17 7.83L1.34 5.07L5.27 4.51L7 1Z" fill="#5B4EFF"/></svg>
+        CERTIFICATE VERIFICATION
+      </div>
+      <h1>证书真实性验证</h1>
+      <p>输入证书编号，即时验证 Beecoming 官方合作证书的真实性</p>
+    </div>
+
+    <div class="vy-search-wrap">
+      <label class="vy-search-label" for="vy-cert-input">证书编号 Certificate Number</label>
+      <div class="vy-search-row">
+        <input
+          id="vy-cert-input"
+          class="vy-input"
+          type="text"
+          placeholder="例：2025060001"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="vy-btn" onclick="verifyCert()">查询验证</button>
+      </div>
+      <p class="vy-hint">证书编号位于证书左下角，格式为 10 位数字</p>
+    </div>
+
+    <div class="vy-result" id="vy-result">
+      <div class="vy-idle">
+        <div class="vy-idle-icon">🔍</div>
+        请在上方输入证书编号进行查询
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer_box">
+      <div class="foo_top">
+        <div class="foo_top_item_one">
+          <div class="foo_top_item_one_img"><a href="/"><img src="/wp-content/themes/mingque/assets/index/image/logo.png" alt="Beecoming"></a></div>
+          <div class="foo_top_item_one_bor"></div>
+          <div class="foo_top_item_one_text">让世界级的优质教育， 变得触手可及</div>
+        </div>
+        <div class="foo_top_item_two">
+          <div class="text_tit">基本信息</div><div class="text_bor"></div>
+          <div class="text_con tc_fw">
+            <div class="text_con_item"><a href="/">项目介绍</a></div>
+            <div class="text_con_item"><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx">项目申请</a></div>
+            <div class="text_con_item"><a href="/about">加入我们</a></div>
+          </div>
+        </div>
+        <div class="foo_top_item_two foo_top_item_tht">
+          <div class="text_tit">申请 Beecoming</div><div class="text_bor"></div>
+          <div class="text_con"><div class="text_con_item"><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx">立即申请</a></div></div>
+        </div>
+        <div class="foo_top_item_two foo_top_item_fou">
+          <div class="text_tit">高中合作</div><div class="text_bor"></div>
+          <div class="text_con">
+            <div class="text_con_item"><a href="/campus">高中合作计划</a></div>
+            <div class="text_con_item"><a href="/campus">已合作高中校区</a></div>
+          </div>
+        </div>
+        <div class="foo_top_item_two foo_top_item_fiv">
+          <div class="text_tit">关于我们</div><div class="text_bor"></div>
+          <div class="text_con">
+            <div class="text_con_item"><a href="/about">关于 Beecoming</a></div>
+            <div class="text_con_item"><a href="mailto:contact@beecoming.com">邮件联系</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="foo_line"></div>
+      <div class="foo_bom">
+        <div class="foo_bom_left">© Beecoming 2026, All Rights Reserved 沪ICP备19033721号-2</div>
+        <div class="foo_bom_right">
+          <div class="foo_bom_right_add"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M9.99817 2C8.65025 2.0095 7.33515 2.41681 6.21782 3.17083C5.10049 3.92486 4.23069 4.99203 3.71753 6.23848C3.20436 7.48493 3.07069 8.85516 3.33326 10.1773C3.59583 11.4994 4.24297 12.7146 5.19349 13.6704L9.99817 18.505L14.8043 13.6704C15.7544 12.7144 16.4011 11.4993 16.6634 10.1772C16.9256 8.85522 16.7917 7.48519 16.2784 6.23898C15.7652 4.99276 14.8954 3.92583 13.7781 3.17198C12.6609 2.41813 11.3459 2.01092 9.99817 2.00143V2ZM9.99817 11.8736C9.60035 11.8727 9.20661 11.7934 8.83943 11.6403C8.47225 11.4872 8.13882 11.2632 7.85819 10.9813C7.57755 10.6993 7.3552 10.3648 7.20382 9.99693C7.05245 9.62904 6.97502 9.23493 6.97596 8.83711C6.97483 8.43935 7.05209 8.04528 7.2033 7.67739C7.35452 7.3095 7.57674 6.97501 7.85726 6.69302C8.13779 6.41104 8.47112 6.18709 8.83822 6.03397C9.20532 5.88085 9.59899 5.80155 9.99674 5.80061C10.3946 5.80155 10.7883 5.88084 11.1555 6.03394C11.5227 6.18705 11.8561 6.41097 12.1367 6.69294C12.4174 6.9749 12.6397 7.30938 12.7911 7.67728C12.9425 8.04518 13.0199 8.43929 13.019 8.83711C13.0209 9.63967 12.704 10.4102 12.1382 10.9793C11.5723 11.5484 10.8036 11.8695 10.001 11.8722L9.99817 11.8736Z" fill="#333333"></path></svg>2010 Crow Canyon Place, Suite 100, San Ramon, California, 94583</div>
+          <div class="foo_bom_right_pho"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M13.8359 17.75H13.7606C11.9892 17.657 9.59666 15.9033 7.358 13.0624L6.53207 12.0194C4.29342 9.1785 3.12095 6.40289 3.39663 4.59825C3.58927 3.32504 5.39282 2.25 6.42357 2.25C6.93064 2.25 7.11554 2.51461 7.18197 2.67404C7.76101 3.76457 8.48287 5.65668 8.4884 6.33536V6.38296L8.47179 6.42836C8.34226 6.78486 8.05551 6.95536 7.80086 7.10704C7.4654 7.30632 7.27608 7.43586 7.25172 7.81118C7.24618 7.92411 7.33918 8.44336 8.81501 10.3521L9.44608 11.1525C10.9274 12.9882 11.3924 13.1852 11.4998 13.2007C11.8575 13.255 12.028 13.0945 12.2837 12.7966C12.4786 12.5675 12.7 12.3139 13.0642 12.2586L13.113 12.2497L13.1572 12.2652C13.8038 12.4036 15.449 13.5196 16.3901 14.35C16.523 14.443 16.7588 14.7242 16.5728 15.3409C16.2805 16.3096 15.004 17.75 13.8359 17.75Z" fill="#333333"></path></svg>400-101-3586</div>
+          <div class="foo_bom_right_ema"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M17.3105 5.85547L9.86719 10.1523L2.60938 5.96094C2.67969 4.86328 3.5918 3.99414 4.70703 3.99414H15.2207C16.3008 3.99414 17.1914 4.80664 17.3105 5.85547ZM17.3242 7.39453V13.9355C17.3242 15.0977 16.3828 16.0391 15.2207 16.0391H4.70703C3.54492 16.0391 2.60352 15.0977 2.60352 13.9355V7.50586L9.53516 11.5078C9.77344 11.6445 10.0605 11.6191 10.2676 11.4668C10.2773 11.4629 10.2852 11.457 10.2949 11.4512L17.3242 7.39453Z" fill="#333333"></path></svg>contact@beecoming.com</div>
+        </div>
+        <div class="icon">
+          <a><img src="/wp-content/themes/mingque/assets/index/image/link1.png" alt="" class="wx_go"></a>
+          <a href="https://www.xiaohongshu.com/user/profile/606face1000000000101e8ef"><img src="/wp-content/themes/mingque/assets/index/image/link3.png" alt=""></a>
+          <a href="https://space.bilibili.com/3706934599354456" target="_blank" title="哔哩哔哩"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M13.5 8 15.5 12M22.5 8 20.5 12" stroke="#333" stroke-width="2" stroke-linecap="round"/><rect x="7" y="12" width="22" height="15" rx="3.5" fill="#333"/><circle cx="13.5" cy="20" r="1.8" fill="white"/><circle cx="22.5" cy="20" r="1.8" fill="white"/><rect x="13.5" y="23.5" width="9" height="1.5" rx="0.75" fill="white"/></svg></a>
+        </div>
+        <div class="fob_shadow"><img src="/wp-content/themes/mingque/assets/index/image/wx_gzh.jpg" alt="" class="wx_go">手机扫码 立即咨询</div>
+      </div>
+    </div>
+  </footer>
+  <script>jQuery(function($){
+    $('.wx_go').hover(function(){$('footer .foo_bom .fob_shadow').css('display','block')},function(){$('footer .foo_bom .fob_shadow').css('display','none')})
+  })</script>
+
+  <script>
+  // ── Certificate database ──────────────────────────────────────────
+  // To add a new certificate, append an entry to this object.
+  // Key = certificate number (string), Value = certificate details.
+  const CERTS = {
+    '2025060001': {
+      school_cn:  '浙江省富阳中学国际部',
+      school_en:  'Zhejian Fuyang High School AP Center',
+      partner:    'Shasta College',
+      program:    'Beecoming Dual Enrollment Program — U.S. accredited college credit enrollment',
+      issued:     'June, 2025',
+      signatory:  'Danqing Zhou, Founder & CEO, Beecoming Inc.',
+    },
+    '2026030001': {
+      school_cn:  '浙江省富阳中学国际部',
+      school_en:  'Zhejian Fuyang High School AP Center',
+      partner:    'Diablo Valley College',
+      program:    'Beecoming Dual Enrollment Program — U.S. accredited college credit enrollment',
+      issued:     'March, 2026',
+      signatory:  'Danqing Zhou, Founder & CEO, Beecoming Inc.',
+    },
+    '2026030002': {
+      school_cn:  '浙江省富阳中学国际部',
+      school_en:  'Zhejian Fuyang High School AP Center',
+      partner:    'De Anza & Foothill College',
+      program:    'Beecoming Dual Enrollment Program — U.S. accredited college credit enrollment',
+      issued:     'March, 2026',
+      signatory:  'Danqing Zhou, Founder & CEO, Beecoming Inc.',
+    },
+    '2026050001': {
+      school_cn:  '浙江省富阳中学国际部',
+      school_en:  'Zhejian Fuyang High School AP Center',
+      partner:    'Santa Monica College',
+      program:    'Beecoming Dual Enrollment Program — U.S. accredited college credit enrollment',
+      issued:     'May, 2026',
+      signatory:  'Danqing Zhou, Founder & CEO, Beecoming Inc.',
+    },
+  };
+
+  // ── Verify logic ──────────────────────────────────────────────────
+  function verifyCert() {
+    const raw   = document.getElementById('vy-cert-input').value.trim().replace(/\s/g, '');
+    const input = document.getElementById('vy-cert-input');
+    const box   = document.getElementById('vy-result');
+
+    if (!raw) {
+      input.focus();
+      return;
+    }
+
+    const cert = CERTS[raw];
+
+    if (!cert) {
+      box.innerHTML = `
+        <div class="vy-error">
+          <div class="vy-error-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 11H9v-2h2v2zm0-4H9V5h2v4z" fill="#DC2626"/>
+            </svg>
+          </div>
+          <div>
+            <div class="vy-error-title">未找到该证书</div>
+            <div class="vy-error-sub">证书编号 <strong>${escHtml(raw)}</strong> 不存在或已过期，请检查编号是否正确</div>
+          </div>
+        </div>`;
+      return;
+    }
+
+    box.innerHTML = `
+      <div class="vy-cert">
+        <div class="vy-cert-header">
+          <div class="vy-cert-check">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="vy-cert-header-text">
+            <div class="vy-cert-header-title">证书验证通过</div>
+            <div class="vy-cert-header-sub">此证书为 Beecoming 官方颁发，信息真实有效</div>
+          </div>
+        </div>
+        <div class="vy-cert-body">
+          <div class="vy-cert-row">
+            <div class="vy-cert-key">学校</div>
+            <div class="vy-cert-val"><strong>${escHtml(cert.school_cn)}</strong><br><span style="font-size:12px;color:var(--sub)">${escHtml(cert.school_en)}</span></div>
+          </div>
+          <div class="vy-cert-row">
+            <div class="vy-cert-key">合作方</div>
+            <div class="vy-cert-val">${escHtml(cert.partner)}</div>
+          </div>
+          <div class="vy-cert-row">
+            <div class="vy-cert-key">项目</div>
+            <div class="vy-cert-val">${escHtml(cert.program)}</div>
+          </div>
+          <div class="vy-cert-row">
+            <div class="vy-cert-key">颁发时间</div>
+            <div class="vy-cert-val">${escHtml(cert.issued)}</div>
+          </div>
+          <div class="vy-cert-row">
+            <div class="vy-cert-key">签署人</div>
+            <div class="vy-cert-val">${escHtml(cert.signatory)}</div>
+          </div>
+        </div>
+        <div class="vy-cert-footer">
+          <span class="vy-cert-num">Certificate No. ${escHtml(raw)}</span>
+          <span class="vy-cert-valid">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#16A34A"/><path d="M3 5.5l1.5 1.5L7 3.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+            VERIFIED
+          </span>
+        </div>
+      </div>`;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Allow pressing Enter to submit
+  document.getElementById('vy-cert-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') verifyCert();
+  });
+
+  // Pre-fill from URL param: /verify?cert=2025060001
+  (function() {
+    const p = new URLSearchParams(window.location.search).get('cert');
+    if (p) {
+      document.getElementById('vy-cert-input').value = p;
+      verifyCert();
+    }
+  })();
+  </script>
+</body>
+</html>

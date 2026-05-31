@@ -279,6 +279,9 @@
                     <a href="/about">
                         <span>关于我们</span>
                     </a>
+                    <a href="/verify">
+                        <span>证书认证</span>
+                    </a>
                 </div>
             </div>
             <div class="tab_right">
@@ -366,6 +369,12 @@
                     <path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path>
                 </svg>
             </a>
+            <a href="/verify" class="nbn_item">
+                证书认证
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewbox="0 0 7 12" fill="none">
+                    <path d="M0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L6.70711 5.29289C7.06759 5.65338 7.09532 6.22061 6.7903 6.6129L6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683418 12.0976 0.292893 11.7071C-0.0675907 11.3466 -0.0953203 10.7794 0.209705 10.3871L0.292893 10.2929L4.585 6L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893Z" fill="#CCCCCC"></path>
+                </svg>
+            </a>
         </div>
         <script>jQuery(function ($) {
                 const url = window.location.href
@@ -376,6 +385,8 @@
                     $('.h_tab .tab_con span')[2].classList.add('purple')
                 } else if (url.includes('about')) {
                     $('.h_tab .tab_con span')[3].classList.add('purple')
+                } else if (url.includes('verify')) {
+                    $('.h_tab .tab_con span')[4].classList.add('purple')
                 } else {
                     $('.h_tab .tab_con span')[0].classList.add('purple')
                 }
@@ -865,6 +876,7 @@
         <a href="https://www.xiaohongshu.com/user/profile/606face1000000000101e8ef">
           <img src="/wp-content/themes/mingque/assets/index/image/link3.png" alt="加载失败">
         </a>
+        <a href="https://space.bilibili.com/3706934599354456" target="_blank" title="哔哩哔哩"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M13.5 8 15.5 12M22.5 8 20.5 12" stroke="#333" stroke-width="2" stroke-linecap="round"/><rect x="7" y="12" width="22" height="15" rx="3.5" fill="#333"/><circle cx="13.5" cy="20" r="1.8" fill="white"/><circle cx="22.5" cy="20" r="1.8" fill="white"/><rect x="13.5" y="23.5" width="9" height="1.5" rx="0.75" fill="white"/></svg></a>
       </div>
       <div class="fob_shadow">
         <img src="/wp-content/themes/mingque/assets/index/image/wx_gzh.jpg" alt="加载失败" class="wx_go">

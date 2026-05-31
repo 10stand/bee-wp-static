@@ -12,12 +12,19 @@ footer {
   margin: 0 auto;
 }
 footer .foo_bom .icon {
-  margin-left: 25px;
+  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
 }
-footer .foo_bom .icon a img {
-  width: 36px;
-  height: 36px;
+footer .foo_bom .icon a img,
+footer .foo_bom .icon a svg {
+  width: 22px;
+  height: 22px;
   cursor: pointer;
+  display: block;
 }
 @media screen and (max-width: 750px) {
   .footer_box {
@@ -48,12 +55,12 @@ footer .foo_bom .icon a img {
 @media screen and (max-width: 750px) {
   footer {
     background-image: url(/wp-content/themes/mingque/assets/index/image/m_bg_footer.png);
-    padding: 32px 20px;
+    padding: 32px 20px 0;
     /*width: 375px;*/
     width: 100%;
     /*height: 709px;*/
     height: auto;
-    background-size: cover;
+    background-size: 100% 100%;
   }
   footer .foo_bom .icon {
     width: 100%;
@@ -63,7 +70,8 @@ footer .foo_bom .icon a img {
     gap: 16px;
     order: 2;
   }
-  footer .foo_bom .icon a img {
+  footer .foo_bom .icon a img,
+  footer .foo_bom .icon a svg {
     width: 40px;
     height: 40px;
   }
@@ -143,7 +151,7 @@ footer .foo_top .foo_top_item_two {
   footer .foo_top .foo_top_item_two {
     padding: 0;
     width: 160px;
-    height: 106px;
+    height: auto;
     margin-bottom: 32px;
     border-left: none;
   }
@@ -282,6 +290,7 @@ footer .foo_bom {
 }
 footer .foo_bom .foo_bom_left {
   width: 360px;
+  flex-shrink: 0;
   margin-top: 8px;
   color: var(--333333, #333);
   font-family: PingFang SC;
@@ -302,6 +311,8 @@ footer .foo_bom .foo_bom_left {
 footer .foo_bom .foo_bom_right {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex: 1;
   width: auto;
   margin-top: 3px;
   color: var(--333333, #333);
@@ -324,6 +335,11 @@ footer .foo_bom .foo_bom_right svg {
   vertical-align: middle;
   margin-left: 10px;
 }
+footer .foo_bom .foo_bom_right .foo_bom_right_add,
+footer .foo_bom .foo_bom_right .foo_bom_right_pho,
+footer .foo_bom .foo_bom_right .foo_bom_right_ema {
+  white-space: nowrap;
+}
 @media screen and (max-width: 750px) {
   footer .foo_bom .foo_bom_right svg {
     margin-right: 0;
@@ -331,6 +347,11 @@ footer .foo_bom .foo_bom_right svg {
   }
 }
 @media screen and (max-width: 750px) {
+  footer .foo_bom .foo_bom_right .foo_bom_right_add,
+  footer .foo_bom .foo_bom_right .foo_bom_right_pho,
+  footer .foo_bom .foo_bom_right .foo_bom_right_ema {
+    white-space: normal;
+  }
   footer .foo_bom .foo_bom_right .foo_bom_right_add {
     margin-bottom: 14px;
     width: 100%;
