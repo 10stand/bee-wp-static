@@ -1,0 +1,76 @@
+# Beecoming美少班 — https://www.beecoming.com
+# 明确放行国内搜索与生成式 AI 的抓取工具。多数 AI 助手（豆包、Kimi、
+# DeepSeek 等）既走自有爬虫，也走搜索引擎索引，两条路都要放开。
+
+# ── 国内搜索引擎 ──
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Baiduspider-render
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sogou inst spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: HaosouSpider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+# ── 生成式 AI 抓取 ──
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ── 通用 ──
+User-agent: *
+Allow: /
+Disallow: /student_portal/
+Disallow: /student_parent/
+Disallow: /wp-json/
+Disallow: /wp-includes/
+Disallow: /wp-admin/
+
+Sitemap: https://www.beecoming.com/sitemap.xml
