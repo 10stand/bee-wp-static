@@ -45,38 +45,7 @@
   </script>
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/reset.css?ver=1.1">
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/footer.css?ver=1.1">
-  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=1.0">
-  <style>
-    /* reset.css 给 body 设了 min-width:1200px（官网为桌面优先设计）。
-       本页是响应式的，去掉这个下限，否则中等宽度会横向溢出。 */
-    body { min-width: 0; }
-    /* footer.css 里 .footer_box 与 .foo_line 是固定 1200px，官网靠 body 的
-       min-width 撑住；这里改成自适应上限 */
-    footer .footer_box { width: min(1200px, calc(100% - 32px)); }
-    footer .foo_line { width: 100%; }
-    /* footer.css 里 .foo_bom 的地址/电话/邮箱是 nowrap，且 .footer_box 固定
-       1200px。官网靠 body 的 min-width:1200 掩盖，本页响应式则会溢出。 */
-    @media (max-width: 1200px) {
-      /* 页脚栏目是按 1200px 固定宽度排的，窄屏会被压扁，改为换行 */
-      footer { padding-left: 0; padding-right: 0; }
-      footer .foo_top { flex-wrap: wrap; gap: 28px 40px; }
-      footer .foo_top > div { flex-shrink: 0; }
-      footer .foo_top .foo_top_item_one { margin-right: 0; }
-      footer .foo_top .foo_top_item_two { width: auto; height: auto; padding: 0 0 0 40px; }
-      footer .foo_line { margin-top: 48px; }
-      footer .foo_bom { flex-wrap: wrap; }
-      footer .foo_bom .foo_bom_right { flex-wrap: wrap; margin-left: 0; }
-      footer .foo_bom .foo_bom_right_add,
-      footer .foo_bom .foo_bom_right_pho,
-      footer .foo_bom .foo_bom_right_ema { white-space: normal; }
-    }
-
-    /* 站点页脚：与首页同一套 footer.css，二维码悬浮改为纯 CSS（本页不加载 jQuery） */
-    footer .foo_bom .icon a { position: relative; }
-    footer .foo_bom .icon a:hover ~ .fob_shadow,
-    footer .foo_bom .fob_shadow:hover { display: block !important; }
-    footer .foo_bom .icon a:first-child:hover + script + a ~ .fob_shadow { display: block !important; }
-  </style>
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=1.1">
 </head>
 <body>
   <header class="site-header">
