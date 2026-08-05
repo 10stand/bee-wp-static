@@ -417,19 +417,17 @@
             </a>
         </div>
         <script>jQuery(function ($) {
-                const url = window.location.href
-                // console.log(url);
-                if (url.includes('campus')) {
-                    $('.h_tab .tab_con span')[1].classList.add('purple')
-                } else if (url.includes('admits')) {
-                    $('.h_tab .tab_con span')[2].classList.add('purple')
-                } else if (url.includes('about')) {
-                    $('.h_tab .tab_con span')[3].classList.add('purple')
-                } else if (url.includes('verify')) {
-                    $('.h_tab .tab_con span')[4].classList.add('purple')
-                } else {
-                    $('.h_tab .tab_con span')[0].classList.add('purple')
-                }
+                // 按 href 匹配当前栏目。原先用写死的下标，新增栏目后会整体错位。
+                const norm = (p) => (p || '').replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/';
+                const path = norm(window.location.pathname);
+                let matched = null;
+                $('.h_tab .tab_con a').each(function () {
+                    const href = norm($(this).attr('href'));
+                    if (href === '/') return;
+                    if (path === href || path.indexOf(href + '/') === 0) matched = this;
+                });
+                if (!matched) matched = $('.h_tab .tab_con a')[0];
+                $(matched).find('span').addClass('purple');
             })</script>
         <div class="zz"></div>
     </header>

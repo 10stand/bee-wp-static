@@ -154,11 +154,12 @@
       display: none;
     }
 
+    /* 尺寸对齐站内 header.css 的 .tab_con：18px / 600 / gap 36px */
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      font-size: 16px;
+      gap: 36px;
+      font-size: 18px;
       color: #000;
       font-weight: 600;
     }
@@ -1266,6 +1267,10 @@
 
 
 /* ── 站点页脚适配（reset.css / footer.css 是桌面优先，这里让其响应式） ── */
+    /* footer.css 按 content-box 编写（如 .foo_top_item_two 是 width:72px + padding:0 73px）。
+       本页的 *{box-sizing:border-box} 会把 padding 算进宽度，内容宽被压成 1px，
+       栏目文字变成竖排。在页脚范围内还原 content-box。 */
+    footer, footer * { box-sizing: content-box; }
     /* reset.css 给 body 设了 min-width:1200px（官网为桌面优先设计）。
        本页是响应式的，去掉这个下限，否则中等宽度会横向溢出。 */
     body { min-width: 0; }
