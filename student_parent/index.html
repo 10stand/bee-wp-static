@@ -536,6 +536,49 @@
         font-size: clamp(2.4rem, 7vw, 4.3rem);
       }
 
+      .loading-card {
+        display: grid;
+        justify-items: center;
+        /* .login-page stretches its child on phones — that is for the login
+           card, this one stays centred */
+        align-self: center;
+        gap: 0.4rem;
+        width: min(26rem, 100%);
+        padding: 2.6rem 2rem;
+        text-align: center;
+      }
+
+      .loading-card p {
+        margin: 0;
+      }
+
+      .loading-title {
+        font-size: 1.25rem;
+        font-weight: 900;
+      }
+
+      .spinner {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-bottom: 0.9rem;
+        border: 3px solid rgba(111, 66, 255, 0.18);
+        border-top-color: var(--purple);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .spinner {
+          animation-duration: 2.4s;
+        }
+      }
+
       .error-box {
         margin-top: 1rem;
         padding: 0.8rem;
@@ -836,7 +879,14 @@
   </head>
   <body>
     <div id="app" class="login-page">
-      <div class="login-card card">
+      <!-- Shown until /api/session answers, so a signed-in refresh never
+           flashes the sign-in prompt at someone who is already signed in -->
+      <div id="loadingCard" class="loading-card card">
+        <span class="spinner" aria-hidden="true"></span>
+        <p class="loading-title">正在登录…</p>
+        <p class="muted">正在确认你的飞书登录状态，请稍候</p>
+      </div>
+      <div id="loginCard" class="login-card card hidden">
         <div class="login-art">
           <img src="/assets/beecoming-portal/logo.png" alt="Beecoming" />
           <div>
@@ -867,6 +917,8 @@
       const ACTIVITY_STATUSES = ["进行中", "已完成", "待完成", "已确定会安排"];
 
       const app = document.getElementById("app");
+      const loadingCard = document.getElementById("loadingCard");
+      const loginCard = document.getElementById("loginCard");
       const statusText = document.getElementById("statusText");
       const loginButton = document.getElementById("loginButton");
       loginButton.href = `${API_BASE}/api/auth/feishu/start?return_to=${encodeURIComponent(location.href)}`;
@@ -936,7 +988,8 @@
       }
 
       function showLogin(message) {
-        document.body.classList.remove("portal-ready");
+        loadingCard.classList.add("hidden");
+        loginCard.classList.remove("hidden");
         if (message) {
           statusText.textContent = message;
           statusText.classList.remove("hidden");
