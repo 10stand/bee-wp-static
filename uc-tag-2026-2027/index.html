@@ -57,7 +57,7 @@
         "author": { "@id": "https://www.beecoming.com/#organization" },
         "publisher": { "@id": "https://www.beecoming.com/#organization" },
         "about": "UC Transfer Admission Guarantee（UC TAG）加州大学保录转学",
-        "description": "根据 UC Transfer Admission Guarantee (TAG) Matrix（信息截至 2025 年 6 月 23 日）整理的中文解读，适用于 2026-2027 入学申请周期。",
+        "description": "面向 2027 Fall 入学（2026-2027 申请季）的 UC TAG 中文解读。申请时间线依据 UC 已公布的 2027 Fall 时间表；GPA 门槛与排除专业依据 TAG Matrix（截至 2025 年 6 月 23 日）。",
         "citation": "UC Transfer Admission Guarantee (TAG) Matrix for students applying for 2026-2027 admission"
       },
       {
@@ -101,7 +101,7 @@
             "name": "UC TAG 什么时候申请？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "2026-2027 周期的 TAG 申请通过 UC TAP 系统在 2025 年 9 月 1 日至 30 日提交。之后仍需在 2025 年 10 月 1 日至 12 月 1 日提交 UC 正式申请，并在 2026 年 1 月 31 日前提交 TAU 成绩更新。UC Merced 另接受 2027 春季 TAG，提交期为 2026 年 5 月 1 日至 31 日。"
+              "text": "2026-2027 周期的 TAG 申请通过 UC TAP 系统在 2026 年 9 月 1 日至 30 日提交。之后仍需在 2026 年 10 月 1 日至 11 月 30 日提交 UC 正式申请，并在 2027 年 1 月 31 日前提交 TAU 成绩更新。UC Merced 另接受 2028 春季 TAG，提交期为 2027 年 5 月 1 日至 31 日。"
             }
           },
           {
@@ -133,1272 +133,7 @@
     ]
   }
   </script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
-
-    @font-face {
-      font-family: "Alimama ShuHeiTi";
-      src: url("/wp-content/themes/mingque/assets/font/Alimama_ShuHeiTi_Bold.ttf") format("truetype");
-      font-display: swap;
-    }
-
-    :root {
-      --p: #5B4EFF;
-      --p-d: #4338CA;
-      --p-l: #EEF2FF;
-      --p-m: rgba(91, 78, 255, 0.12);
-      --ink: #111827;
-      --muted: #6B7280;
-      --line: #E5E7EB;
-      --paper: #ffffff;
-      --surface: #ffffff;
-      --soft: #F9FAFB;
-      --white: #FFFFFF;
-      --gold: #FFCF00;
-      --gold-dark: #B45309;
-      --green: var(--p);
-      --blue: #003262;
-      --red: #FE2367;
-      --shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-      color: var(--ink);
-      background: var(--paper);
-      letter-spacing: 0;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.65;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      background: #fff;
-    }
-
-    /* 与官网一致的滚动条。官网用 jQuery 驱动，本页独立且不加载 jQuery，
-       因此用等效的纯 CSS 无限滚动实现，视觉与文案保持一致。 */
-    .promo-bar {
-      background: #6740E0;
-      color: #fff;
-      overflow: hidden;
-      padding: 11px 0;
-    }
-
-    .promo-track {
-      display: flex;
-      width: max-content;
-      animation: promo-scroll 32s linear infinite;
-    }
-
-    .promo-bar:hover .promo-track {
-      animation-play-state: paused;
-    }
-
-    @keyframes promo-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .promo-track {
-        animation: none;
-      }
-    }
-
-    .promo-item {
-      display: flex;
-      align-items: center;
-      margin-left: 20px;
-      white-space: nowrap;
-    }
-
-    .promo-line {
-      width: 40px;
-      height: 1px;
-      margin-right: 32px;
-      background: #fff;
-      flex-shrink: 0;
-    }
-
-    .promo-item span {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 20px;
-    }
-
-    .promo-item svg {
-      padding: 0 12px;
-    }
-
-    .promo-bar a .yellow {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    @media (max-width: 750px) {
-      .promo-bar {
-        display: none;
-      }
-    }
-
-    .nav {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      min-height: 88px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
-    .brand-logo {
-      width: 214px;
-      height: 40px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .brand-fallback {
-      display: none;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      font-size: 16px;
-      color: #000;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      min-height: 88px;
-      display: inline-flex;
-      align-items: center;
-      border-bottom: 4px solid transparent;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: #794EFF;
-      border-bottom-color: #794EFF;
-      outline: none;
-    }
-
-    .nav-links a.current {
-      color: #794EFF;
-      border-bottom-color: #794EFF;
-    }
-
-    .nav-cta,
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 0 24px;
-      border: 1.5px solid var(--p);
-      border-radius: 8px;
-      background: var(--p);
-      color: #fff;
-      font-family: "Lato", "PingFang SC", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      white-space: nowrap;
-      box-shadow: none;
-      transition: all 0.18s ease;
-    }
-
-    .nav-cta {
-      border-left: 1px solid var(--p);
-      background: transparent;
-      color: var(--p);
-      border-top: 0;
-      border-right: 0;
-      border-bottom: 0;
-      border-radius: 0;
-      padding-left: 34px;
-      padding-right: 0;
-      min-height: 48px;
-      font-family: "PingFang SC", sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .nav-cta::after {
-      content: "→";
-      font-family: "Lato", sans-serif;
-      font-weight: 900;
-      margin-left: 4px;
-    }
-
-    .button:hover,
-    .button:focus-visible {
-      background: var(--p-d);
-      border-color: var(--p-d);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(91, 78, 255, 0.28);
-      outline: none;
-    }
-
-    .button.secondary {
-      background: var(--white);
-      color: var(--p);
-      border-color: var(--p);
-    }
-
-    .button.secondary:hover,
-    .button.secondary:focus-visible {
-      background: var(--p-l);
-      color: var(--p-d);
-      border-color: var(--p-d);
-      box-shadow: none;
-    }
-
-    .hero {
-      border-bottom: 1px solid var(--line);
-      background: var(--white);
-    }
-
-    .hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      min-height: 650px;
-      padding: 72px 0 58px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
-      gap: 48px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border: 1.5px solid var(--line);
-      border-radius: 100px;
-      color: var(--muted);
-      background: var(--white);
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--p);
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      line-height: 1.15;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      margin-top: 20px;
-      max-width: 820px;
-      font-family: "Alimama ShuHeiTi", "PingFang SC", sans-serif;
-      font-size: clamp(42px, 5vw, 62px);
-      font-weight: 700;
-      line-height: 1.15;
-    }
-
-    h1 span {
-      display: block;
-    }
-
-    h1 em {
-      color: var(--p);
-      font-style: normal;
-    }
-
-    .hero-copy {
-      max-width: 600px;
-      margin: 22px 0 0;
-      font-size: clamp(16px, 1.8vw, 18px);
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .source-note {
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .hero-actions {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-panel {
-      background: var(--soft);
-      border: 1.5px solid var(--line);
-      border-radius: 14px;
-      box-shadow: none;
-      overflow: hidden;
-    }
-
-    .panel-top {
-      padding: 22px;
-      border-bottom: 1px solid var(--line);
-      background: var(--soft);
-    }
-
-    .panel-top strong {
-      display: block;
-      font-size: 19px;
-    }
-
-    .panel-top span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .stat {
-      padding: 20px 16px;
-      border-right: 1px solid var(--line);
-    }
-
-    .stat:last-child {
-      border-right: 0;
-    }
-
-    .stat b {
-      display: block;
-      font-family: "Lato", sans-serif;
-      font-weight: 900;
-      font-size: 32px;
-      line-height: 1;
-      color: var(--p);
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .route-map {
-      padding: 22px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .route-step {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-
-    .step-dot {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--p);
-      color: #fff;
-      font-family: "Lato", sans-serif;
-      font-weight: 900;
-      font-size: 13px;
-    }
-
-    .route-step strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .route-step span {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    main {
-      overflow: hidden;
-    }
-
-    section {
-      padding: 80px 0;
-    }
-
-    .band {
-      background: var(--soft);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .wrap {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.42fr);
-      gap: 42px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    .section-head h2 {
-      font-family: "Alimama ShuHeiTi", "PingFang SC", sans-serif;
-      font-weight: 700;
-      font-size: clamp(28px, 3.6vw, 42px);
-      line-height: 1.25;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .insight-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
-
-    .insight-card,
-    .campus-card,
-    .check-card,
-    .service-card {
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-      box-shadow: none;
-    }
-
-    .insight-card {
-      padding: 22px;
-      min-height: 186px;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-    }
-
-    .insight-card:hover {
-      border-color: var(--p);
-      box-shadow: 0 6px 24px rgba(91, 78, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 34px;
-      height: 34px;
-      padding: 0 8px;
-      border-radius: 10px;
-      background: var(--p-l);
-      color: var(--p-d);
-      font-family: "Lato", sans-serif;
-      font-weight: 900;
-    }
-
-    .insight-card h3 {
-      margin-top: 18px;
-      font-size: 18px;
-    }
-
-    .insight-card p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .timeline {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(6, minmax(150px, 1fr));
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-    }
-
-    .time-item {
-      min-width: 170px;
-      padding: 20px 18px 18px;
-      border: 1.5px solid var(--line);
-      border-top: 4px solid var(--p);
-      border-radius: 14px;
-      background: var(--surface);
-    }
-
-    .time-item:first-child {
-      border-left: 1.5px solid var(--line);
-      border-radius: 14px;
-    }
-
-    .time-item:last-child {
-      border-radius: 14px;
-    }
-
-    .time-item b {
-      display: block;
-      color: var(--p);
-      font-family: "Lato", "PingFang SC", sans-serif;
-      font-weight: 900;
-      font-size: 15px;
-    }
-
-    .time-item strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 17px;
-      line-height: 1.3;
-    }
-
-    .time-item span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .eligibility {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .check-card {
-      padding: 28px;
-    }
-
-    .check-card h3 {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .check-list {
-      display: grid;
-      gap: 12px;
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .check-list li {
-      position: relative;
-      padding-left: 28px;
-      color: var(--muted);
-    }
-
-    .check-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 9px;
-      width: 12px;
-      height: 12px;
-      border: 0;
-      border-radius: 5px;
-      background: var(--p);
-    }
-
-    .check-card.warning .check-list li::before {
-      background: var(--red);
-    }
-
-    .table-shell {
-      overflow-x: auto;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-      box-shadow: none;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 980px;
-      background: var(--surface);
-    }
-
-    th,
-    td {
-      text-align: left;
-      vertical-align: top;
-      padding: 15px 16px;
-      border-bottom: 1px solid var(--line);
-      border-right: 1px solid var(--line);
-      font-size: 14px;
-    }
-
-    th:last-child,
-    td:last-child {
-      border-right: 0;
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-    th {
-      position: sticky;
-      top: 130px;
-      z-index: 5;
-      background: var(--p-l);
-      color: var(--p-d);
-      font-size: 13px;
-      line-height: 1.35;
-      font-weight: 800;
-    }
-
-    td strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      margin: 0 6px 6px 0;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: #FFF7CC;
-      color: #7A4C00;
-      font-family: "Lato", "PingFang SC", sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .tag.green {
-      background: var(--p-l);
-      color: var(--p-d);
-    }
-
-    .tag.red {
-      background: rgba(254, 35, 103, 0.09);
-      color: var(--red);
-    }
-
-    .campus-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .campus-card {
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-height: 100%;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-    }
-
-    .campus-card:hover {
-      border-color: var(--p);
-      box-shadow: 0 6px 24px rgba(91, 78, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .campus-card h3 {
-      font-size: 24px;
-    }
-
-    .campus-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .campus-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .campus-card ul {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .parent-read {
-      margin-top: auto;
-      padding: 16px;
-      border-left: 3px solid var(--p);
-      border-radius: 0 12px 12px 0;
-      background: var(--p-l);
-      color: var(--ink);
-      font-size: 14px;
-    }
-
-    .fit-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.55fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .fit-panel {
-      padding: 34px;
-      border-radius: 20px;
-      background: linear-gradient(120deg, #4338CA 0%, #5B4EFF 50%, #7C3AED 100%);
-      color: #fff;
-      min-height: 100%;
-    }
-
-    .fit-panel h2 {
-      font-family: "Alimama ShuHeiTi", "PingFang SC", sans-serif;
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.25;
-    }
-
-    .fit-panel p {
-      max-width: 760px;
-      color: rgba(255, 255, 255, 0.84);
-    }
-
-    .fit-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .fit-list div {
-      min-height: 92px;
-      padding: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .fit-list strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .fit-list span {
-      display: block;
-      color: rgba(255, 255, 255, 0.76);
-      font-size: 14px;
-    }
-
-    .service-panel {
-      display: grid;
-      gap: 12px;
-    }
-
-    .service-card {
-      padding: 22px;
-    }
-
-    .service-card strong {
-      display: block;
-      font-size: 17px;
-    }
-
-    .service-card span {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .merced-note {
-      margin-top: 22px;
-      padding: 20px 22px;
-      border: 1.5px solid rgba(91, 78, 255, 0.18);
-      border-radius: 14px;
-      background: var(--p-l);
-      color: var(--ink);
-    }
-
-    .footer-cta {
-      background: linear-gradient(120deg, #4338CA 0%, #5B4EFF 50%, #7C3AED 100%);
-      border-top: 0;
-      padding: 64px 0;
-    }
-
-    .cta-inner {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .cta-inner h2 {
-      font-family: "Alimama ShuHeiTi", "PingFang SC", sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      color: #fff;
-    }
-
-    .cta-inner p {
-      margin: 12px 0 0;
-      max-width: 760px;
-      color: rgba(255, 255, 255, 0.74);
-    }
-
-    .footer-cta .button {
-      background: #fff;
-      color: var(--p-d);
-      border-color: #fff;
-    }
-
-    .footer-cta .button:hover,
-    .footer-cta .button:focus-visible {
-      color: var(--p-d);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-    }
-
-    /* 内容中的就近转化条：读完一段结论后立刻给出咨询入口 */
-    .consult-strip {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 20px;
-      align-items: center;
-      margin-top: 28px;
-      padding: 22px 26px;
-      border: 1.5px solid rgba(91, 78, 255, 0.22);
-      border-radius: 16px;
-      background: var(--p-l);
-    }
-
-    .consult-strip strong {
-      display: block;
-      font-size: 18px;
-    }
-
-    .consult-strip span {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* 资讯分享 */
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .news-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 24px;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-    }
-
-    .news-card:hover {
-      border-color: var(--p);
-      box-shadow: 0 6px 24px rgba(91, 78, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .news-kind {
-      display: inline-flex;
-      width: fit-content;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: var(--p-l);
-      color: var(--p-d);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .news-kind.official {
-      background: #FFF7CC;
-      color: #7A4C00;
-    }
-
-    .news-card h3 {
-      font-size: 17px;
-      line-height: 1.45;
-    }
-
-    .news-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .news-card .news-go {
-      margin-top: auto;
-      padding-top: 8px;
-      color: var(--p);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .wechat-block {
-      display: grid;
-      grid-template-columns: 132px minmax(0, 1fr);
-      gap: 22px;
-      align-items: center;
-      margin-top: 20px;
-      padding: 24px;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-
-    .wechat-block img {
-      width: 132px;
-      height: 132px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: #fff;
-    }
-
-    .wechat-block strong {
-      display: block;
-      font-size: 18px;
-    }
-
-    .wechat-block p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* 常见问题：问答结构同时服务家长阅读与 AI 抽取 */
-    .faq-list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .faq-item {
-      padding: 24px 26px;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-
-    .faq-item h3 {
-      font-size: 18px;
-      line-height: 1.45;
-    }
-
-    .faq-item p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    /* 咨询通道 */
-    .consult-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .consult-card {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 26px;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-
-    .consult-card b {
-      font-family: "Lato", sans-serif;
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--p);
-      letter-spacing: 0.06em;
-    }
-
-    .consult-card strong {
-      font-size: 19px;
-    }
-
-    .consult-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .consult-card .button {
-      margin-top: auto;
-      padding-top: 0;
-    }
-
-    .consult-card .contact-line {
-      margin-top: auto;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--p-d);
-    }
-
-    /* 滚动后出现的常驻咨询按钮 */
-    .float-consult {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 100px;
-      background: var(--p);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 800;
-      box-shadow: 0 10px 30px rgba(91, 78, 255, 0.34);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(12px);
-      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
-    }
-
-    .float-consult.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .float-consult:hover {
-      background: var(--p-d);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .float-consult {
-        transition: none;
-      }
-    }
-
-    .disclaimer {
-      padding: 28px 0 42px;
-      color: var(--muted);
-      font-size: 13px;
-      background: var(--white);
-    }
-
-    .disclaimer p {
-      margin: 0;
-    }
-
-    @media (max-width: 980px) {
-      .hero-inner,
-      .section-head,
-      .fit-grid,
-      .cta-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-inner {
-        min-height: auto;
-        padding-top: 52px;
-      }
-
-      .insight-grid,
-      .campus-grid,
-      .news-grid,
-      .consult-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .consult-strip {
-        grid-template-columns: 1fr;
-      }
-
-      /* 原本整条隐藏，家长进来后就没有回首页的入口了；改为可横滑的一行 */
-      .nav {
-        flex-wrap: wrap;
-        min-height: 0;
-        padding: 12px 0;
-        gap: 10px;
-      }
-
-      .nav-links {
-        order: 3;
-        width: 100%;
-        gap: 20px;
-        overflow-x: auto;
-        font-size: 15px;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .nav-links a {
-        min-height: 38px;
-        border-bottom-width: 3px;
-        white-space: nowrap;
-      }
-
-      th {
-        top: 130px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .promo-bar {
-        min-height: 40px;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .promo-line {
-        width: 20px;
-      }
-
-      .nav {
-        width: min(100% - 24px, 1180px);
-        min-height: 60px;
-      }
-
-      .brand-logo {
-        width: 108px;
-        height: auto;
-      }
-
-      .brand span {
-        display: none;
-      }
-
-      .nav-cta {
-        min-height: 32px;
-        padding-left: 20px;
-        font-size: 14px;
-      }
-
-      .hero-inner,
-      .wrap,
-      .cta-inner {
-        width: min(100% - 24px, 1180px);
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      section {
-        padding: 48px 0;
-      }
-
-      .hero-inner {
-        padding: 38px 0 34px;
-      }
-
-      .hero-panel {
-        display: none;
-      }
-
-      .stats,
-      .insight-grid,
-      .eligibility,
-      .campus-grid,
-      .fit-list,
-      .news-grid,
-      .consult-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .wechat-block {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-      }
-
-      .float-consult {
-        right: 12px;
-        bottom: 12px;
-        min-height: 46px;
-        padding: 0 18px;
-        font-size: 14px;
-      }
-
-      .timeline {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        overflow-x: visible;
-      }
-
-      .time-item,
-      .time-item:first-child,
-      .time-item:last-child {
-        min-width: 0;
-        border: 1.5px solid var(--line);
-        border-top: 4px solid var(--p);
-        border-radius: 14px;
-      }
-
-      .stat {
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .stat:last-child {
-        border-bottom: 0;
-      }
-
-      .hero-actions {
-        display: grid;
-      }
-
-      .button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=1.0">
 </head>
 <body>
   <header class="site-header">
@@ -1443,7 +178,7 @@
             给正在考虑“社区大学转 UC”的中国家庭：TAG 可以把一所参与校区的录取变得更确定，但它不是所有 UC、所有专业都能保，也不是只看总 GPA。本文由 <strong>Beecoming美少班</strong> 学术团队整理。
           </p>
           <p class="source-note">
-            根据 UC Transfer Admission Guarantee (TAG) Matrix 整理，文件信息截至 2025 年 6 月 23 日，适用于 2026-2027 入学申请周期。
+            适用于 <strong>2027 Fall 入学</strong>（2026-2027 申请季）。申请时间线依据 UC 已公布的 2027 Fall 时间表；GPA 门槛与排除专业依据 UC Transfer Admission Guarantee (TAG) Matrix（截至 2025 年 6 月 23 日），UC 发布新一版矩阵后请以官网为准。
           </p>
           <div class="hero-actions">
             <a class="button" href="#consult">免费评估孩子的 TAG 资格</a>
@@ -1522,12 +257,12 @@
           <article class="insight-card">
             <span class="number">04</span>
             <h3>课程节点不能拖</h3>
-            <p>至少一门英文 UC-E 和一门数学 UC-M 需在 2025 年秋季结束前完成，7-course pattern 需在 2026 年春季前完成。</p>
+            <p>至少一门英文 UC-E 和一门数学 UC-M 需在 2026 年秋季结束前完成，7-course pattern 需在 2027 年春季前完成。</p>
           </article>
           <article class="insight-card">
             <span class="number">05</span>
             <h3>申请是两步走</h3>
-            <p>TAG 申请在 UC TAP 提交；之后仍要按时提交 UC Application，并在 2026 年 1 月 31 日前提交 TAU。</p>
+            <p>TAG 申请在 UC TAP 提交；之后仍要按时提交 UC Application，并在 2027 年 1 月 31 日前提交 TAU。</p>
           </article>
         </div>
       </div>
@@ -1537,44 +272,44 @@
       <div class="wrap">
         <div class="section-head">
           <h2>2026-2027 周期关键时间线</h2>
-          <p>以下日期均来自该周期官方矩阵。页面发布时建议保留“以 UC 最新官网为准”的提示，避免家长误用于其他年份。</p>
+          <p>以下为 2027 Fall 入学（2026-2027 申请季）的节点。UC 已将本科申请截止日期由 12 月 1 日调整为 11 月 30 日，请以 UC 最新官网为准。</p>
         </div>
         <div class="timeline" aria-label="TAG 申请时间线">
           <div class="time-item">
-            <b>2025 夏季结束</b>
+            <b>2026 夏季结束</b>
             <strong>已完成至少 30 学期制可转 UC 学分</strong>
             <span>或 45 quarter units；部分校区的 GPA 门槛也按此时间点计算。</span>
           </div>
           <div class="time-item">
-            <b>2025 年 9 月 1-30 日</b>
+            <b>2026 年 9 月 1-30 日</b>
             <strong>通过 UC TAP 提交 TAG</strong>
             <span>学生必须同时满足共同规则和目标校区的专属规则。</span>
           </div>
           <div class="time-item">
-            <b>2025 秋季结束</b>
+            <b>2026 秋季结束</b>
             <strong>完成至少 1 门英文和 1 门数学</strong>
             <span>即 UC-E 与 UC-M；Irvine 和 Santa Barbara 的 GPA 门槛也按秋季结束计算。</span>
           </div>
           <div class="time-item">
-            <b>2025 年 10 月 1 日-12 月 1 日</b>
+            <b>2026 年 10 月 1 日-11 月 30 日</b>
             <strong>提交 UC 正式申请</strong>
             <span>TAG 校区的 TAG 专业和 UC Application 专业必须一致。</span>
           </div>
           <div class="time-item">
-            <b>2026 年 1 月 31 日前</b>
+            <b>2027 年 1 月 31 日前</b>
             <strong>提交 TAU 成绩更新</strong>
             <span>如实更新秋季成绩和后续课程计划，是 TAG 审核延续的重要材料。</span>
           </div>
           <div class="time-item">
-            <b>2026 春季结束</b>
+            <b>2027 春季结束</b>
             <strong>完成 60 学期制可转 UC 学分</strong>
             <span>或 90 quarter units；还需完成剩余 7-course pattern，春季最多不能靠超过 19 个可转学分补齐 junior standing。</span>
           </div>
         </div>
 
         <div class="merced-note">
-          <strong>UC Merced 2027 春季 TAG 另有节点：</strong>
-          第一门 UC-E 须在 2026 春季结束前完成，第二门 UC-E 须在 2026 夏季结束前完成，UC-M 须在 2026 秋季结束前完成；其他 TAG 条件须在 2026 秋季结束前满足。
+          <strong>UC Merced 2028 春季 TAG 另有节点：</strong>
+          第一门 UC-E 须在 2027 春季结束前完成，第二门 UC-E 须在 2027 夏季结束前完成，UC-M 须在 2027 秋季结束前完成；其他 TAG 条件须在 2027 秋季结束前满足。
         </div>
       </div>
     </section>
@@ -1590,10 +325,10 @@
             <h3>共同资格要求</h3>
             <ul class="check-list">
               <li>TAG 提交时，已完成至少 30 semester / 45 quarter UC-transferable units。</li>
-              <li>2025 秋季结束前完成至少一门 UC-E 英文和一门 UC-M 数学。</li>
-              <li>2026 春季结束前完成 UC 7-course pattern 中剩余课程。</li>
-              <li>2026 春季结束前达到 60 semester / 90 quarter 可转学分，即 junior standing。</li>
-              <li>2026 春季结束前，至少 30 semester / 45 quarter 可转学分来自一所或多所加州社区大学，且最后一个 regular session 就读学校必须是 CCC。</li>
+              <li>2027 秋季结束前完成至少一门 UC-E 英文和一门 UC-M 数学。</li>
+              <li>2027 春季结束前完成 UC 7-course pattern 中剩余课程。</li>
+              <li>2027 春季结束前达到 60 semester / 90 quarter 可转学分，即 junior standing。</li>
+              <li>2027 春季结束前，至少 30 semester / 45 quarter 可转学分来自一所或多所加州社区大学，且最后一个 regular session 就读学校必须是 CCC。</li>
               <li>最后一个春季或 regular term 不能需要超过 19 个 UC-transferable units 才能达到 junior standing。</li>
               <li>总 UC-transferable units 不超过 80 semester / 120 quarter；只有 CCC 课程加 AP、IB、A-Level 通常不会超过此上限。</li>
               <li>转学前最后一学年的可转 UC 课程 GPA 至少 2.0，且没有低于 C 的成绩。</li>
@@ -1641,31 +376,31 @@
             <tbody>
               <tr>
                 <td><strong>UC Davis</strong></td>
-                <td>仅秋季；2025 年 9 月 1-30 日提交。</td>
-                <td>农业与环境科学、生物科学、文理学院 3.2；工程学院 3.5。以上 GPA 需在 2025 夏季结束前达到。</td>
+                <td>仅秋季；2026 年 9 月 1-30 日提交。</td>
+                <td>农业与环境科学、生物科学、文理学院 3.2；工程学院 3.5。以上 GPA 需在 2026 夏季结束前达到。</td>
                 <td>不要求。</td>
                 <td>Undeclared、Computer Science、Data Science、Landscape Architecture；Landscape Architecture 只批 pre-major，不保证最终专业。</td>
                 <td>工程和热门 STEM 需要提前核对专业课组要求，不能只看总 GPA。</td>
               </tr>
               <tr>
                 <td><strong>UC Irvine</strong></td>
-                <td>仅秋季；2025 年 9 月 1-30 日提交。</td>
-                <td>3.4，需在 2025 秋季结束前达到。</td>
+                <td>仅秋季；2026 年 9 月 1-30 日提交。</td>
+                <td>3.4，需在 2026 秋季结束前达到。</td>
                 <td>不要求。</td>
                 <td>Art、Business Administration、Dance、Music、Nursing Science，以及 Donald Bren School of Information and Computer Sciences 下所有专业。</td>
                 <td>Irvine 的 TAG 对专业限制较多，商科、护理和计算机方向家庭要尽早设计备选路径。</td>
               </tr>
               <tr>
                 <td><strong>UC Merced</strong></td>
-                <td>秋季；另接受春季 TAG，春季提交期为 2026 年 5 月 1-31 日。</td>
-                <td>工程学院 3.0；自然科学学院 2.9；社会科学、人文与艺术学院 2.8；Psychology 与 Public Health 为 3.0。以上 GPA 需在 2025 夏季结束前达到。</td>
+                <td>秋季；另接受春季 TAG，春季提交期为 2027 年 5 月 1-31 日。</td>
+                <td>工程学院 3.0；自然科学学院 2.9；社会科学、人文与艺术学院 2.8；Psychology 与 Public Health 为 3.0。以上 GPA 需在 2026 夏季结束前达到。</td>
                 <td>仅 Public Health 要求 IGETC；其他专业不要求。</td>
                 <td>官方矩阵显示所有专业目前开放 TAG，但注明可能变化。</td>
                 <td>Merced 是灵活度较高的 TAG 选项，也有春季机会；但仍需检查目标专业先修课。</td>
               </tr>
               <tr>
                 <td><strong>UC Riverside</strong></td>
-                <td>秋季；2025 年 9 月 1-30 日提交。不接受 2027 冬季 TAG。</td>
+                <td>秋季；2026 年 9 月 1-30 日提交。不接受 2028 冬季 TAG。</td>
                 <td>CHASS 2.8，Psychology 与 Theater, Film & Digital Production 3.3；BCOE 3.0，Computer Science 3.6、CS with Business Applications 3.3、Computer Engineering 3.3、Mechanical Engineering 3.1；CNAS 2.8，Data Science 3.0；School of Business 2.8；Graduate School of Education 和 School of Public Policy 2.7。</td>
                 <td>不要求；School of Business 强烈建议完成 IGETC。</td>
                 <td>Art Studio 不开放 TAG。</td>
@@ -1673,16 +408,16 @@
               </tr>
               <tr>
                 <td><strong>UC Santa Barbara</strong></td>
-                <td>仅秋季；2025 年 9 月 1-30 日提交。</td>
-                <td>所有专业 3.4，需在 2025 秋季结束前达到；部分专业还要求专业预备课 GPA。</td>
+                <td>仅秋季；2026 年 9 月 1-30 日提交。</td>
+                <td>所有专业 3.4，需在 2026 秋季结束前达到；部分专业还要求专业预备课 GPA。</td>
                 <td>不要求。</td>
                 <td>College of Creative Studies 所有专业、College of Engineering 所有专业、Dance B.A. / B.F.A.、Music B.M.、Theater B.F.A. 不开放 TAG。文理学院带 pre-major 的专业只保证 pre-major，不保证最终 full major。</td>
                 <td>UCSB 的“保录”要特别看是否是 pre-major；生物、化学、生化、经济、数学、物理等专业还要看专业课 GPA。</td>
               </tr>
               <tr>
                 <td><strong>UC Santa Cruz</strong></td>
-                <td>仅秋季；2025 年 9 月 1-30 日提交。</td>
-                <td>所有专业 3.0，需在 2025 夏季结束前达到；部分专业有额外专业预备课 GPA。</td>
+                <td>仅秋季；2026 年 9 月 1-30 日提交。</td>
+                <td>所有专业 3.0，需在 2026 夏季结束前达到；部分专业有额外专业预备课 GPA。</td>
                 <td>不要求。</td>
                 <td>Computer Science B.A. 与 B.S. 不开放 TAG。</td>
                 <td>Santa Cruz 对 screening majors 可通过 TAG 保证，但计算机不在 TAG 范围内。</td>
@@ -1749,7 +484,7 @@
               </div>
             </div>
             <ul>
-              <li>提供课程预评估；Fall TAG 结果通常 2025 年 11 月 15 日公布。</li>
+              <li>提供课程预评估；Fall TAG 结果通常 2026 年 11 月 15 日公布。</li>
               <li>官方矩阵显示所有专业目前开放 TAG，但注明可能变化。</li>
               <li>Public Health 需要 IGETC，其他专业不要求。</li>
             </ul>
@@ -1885,8 +620,8 @@
             <span class="news-go">前往查询 →</span>
           </a>
 
-          <a class="news-card" href="https://mp.weixin.qq.com/s/cps0PvzfouSJlg9ZCgOuUg" rel="noopener" target="_blank">
-            <span class="news-kind">公众号</span>
+          <a class="news-card" href="/news/uc-2027fall-timeline">
+            <span class="news-kind">升学资讯</span>
             <h3>2027 Fall 的 UC 申请截止日期为什么提前了？</h3>
             <p>加州大学已更新 2027 Fall 本科申请时间线，截止日期由 12 月 1 日提前至 2026 年 11 月 30 日。文中同时列出大一与转学两条完整节点，含 TAG 申请窗口与 TAU 提交期限。</p>
             <span class="news-go">阅读全文 →</span>
@@ -1982,7 +717,7 @@
           </article>
           <article class="faq-item">
             <h3>UC TAG 什么时候申请？</h3>
-            <p>2026-2027 周期的 TAG 申请通过 UC TAP 系统在 2025 年 9 月 1 日至 30 日提交。之后仍需在 2025 年 10 月 1 日至 12 月 1 日提交 UC 正式申请，并在 2026 年 1 月 31 日前提交 TAU 成绩更新。UC Merced 另接受 2027 春季 TAG，提交期为 2026 年 5 月 1 日至 31 日。</p>
+            <p>2026-2027 周期的 TAG 申请通过 UC TAP 系统在 2026 年 9 月 1 日至 30 日提交。之后仍需在 2026 年 10 月 1 日至 11 月 30 日提交 UC 正式申请，并在 2027 年 1 月 31 日前提交 TAU 成绩更新。UC Merced 另接受 2028 春季 TAG，提交期为 2027 年 5 月 1 日至 31 日。</p>
           </article>
           <article class="faq-item">
             <h3>2027 Fall 的 UC 申请截止日期有变化吗？</h3>
@@ -2055,7 +790,7 @@
         <strong>关于 Beecoming美少班</strong>：Beecoming美少班为中国高中生提供中美双学籍项目——在保持中国高中学籍的同时修读美国大学通识课程，取得官方可转学分与美国大学成绩单，并通过 UC Transfer Pathway、UC TAG 等路径申请加州大学等美国名校。咨询电话 400-101-3586，邮箱 contact@beecoming.com，官网 <a href="https://www.beecoming.com/" style="color:var(--p);font-weight:700;">www.beecoming.com</a>。
       </p>
       <p>
-        资料来源：UC Transfer Admission Guarantee (TAG) Matrix for students applying for 2026-2027 admission，准确日期为 2025 年 6 月 23 日。UC TAG 政策、专业开放情况、GPA 与课程要求可能变化；本页为中文整理与规划解读，不替代 UC 各校区官方 admissions 网站、ASSIST articulation agreement 或 counselor 建议。
+        适用周期：2027 Fall 入学（2026-2027 申请季）。申请时间线依据 UC 已公布的 2027 Fall 时间表；GPA 门槛、专业开放情况与课程要求依据 UC Transfer Admission Guarantee (TAG) Matrix，准确日期为 2025 年 6 月 23 日 —— UC 发布新一版矩阵后，这部分数据需重新核对。UC TAG 政策、专业开放情况、GPA 与课程要求可能变化；本页为中文整理与规划解读，不替代 UC 各校区官方 admissions 网站、ASSIST articulation agreement 或 counselor 建议。
       </p>
     </div>
   </footer>
