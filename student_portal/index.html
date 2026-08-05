@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex" />
+    <title>Beecoming Student Portal</title>
+    <link rel="icon" href="/wp-content/themes/mingque/favicon.ico" />
+    <style>
+      :root {
+        --ink: #171b2a;
+        --muted: #6f7586;
+        --line: #e3e7ef;
+        --soft: #f6f4ff;
+        --surface: #ffffff;
+        --purple: #6f42ff;
+        --purple-dark: #5631db;
+        --blue: #3057f3;
+        --yellow: #ffc72c;
+        --green: #18a058;
+        --orange: #f59e0b;
+        --shadow: 0 18px 50px rgba(29, 23, 74, 0.09);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 88% 8%, rgba(255, 199, 44, 0.18), transparent 28rem),
+          radial-gradient(circle at 0 0, rgba(111, 66, 255, 0.12), transparent 31rem),
+          #fbfbff;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        /* dvh tracks the visible area; on mobile Safari 100vh is the
+           toolbar-collapsed height, which pads dead space below the content */
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: grid;
+        grid-template-columns: 20rem minmax(0, 1fr);
+      }
+
+      /* Anchored at both ends: brand on top, logout at the bottom, so the
+         column reads as deliberate rather than as a half-empty panel. */
+      .side {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1.4rem;
+        border-right: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(18px);
+        overflow: auto;
+      }
+
+      /* Section switcher lives in the sidebar while there is a sidebar; the
+         horizontal .tabs bar takes over once it folds into a header. */
+      .side-nav {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 1.6rem;
+      }
+
+      .side-nav button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        min-height: 3rem;
+        padding: 0 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9rem;
+        background: #fff;
+        color: var(--ink);
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .side-nav button b {
+        color: var(--muted);
+      }
+
+      .side-nav button.active {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .side-nav button.active b {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .side-logout {
+        margin-top: auto;
+      }
+
+      .brand {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .brand img {
+        width: min(15rem, 82vw);
+        height: auto;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 0.65rem;
+        font-size: clamp(2rem, 4.6vw, 3.3rem);
+        line-height: 1.03;
+        letter-spacing: 0;
+      }
+
+      .side-title {
+        margin: 1.8rem 0 1rem;
+        font-size: 1.55rem;
+        line-height: 1.12;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .panel {
+        margin-top: 1.4rem;
+        padding: 1.1rem;
+        border: 1px solid var(--line);
+        border-radius: 1.2rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .field {
+        display: grid;
+        gap: 0.45rem;
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      select {
+        width: 100%;
+        min-height: 3rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9rem;
+        background: #fff;
+        color: var(--ink);
+        padding: 0 0.85rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: 3rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border: 1px solid var(--line);
+        border-radius: 0.95rem;
+        background: #fff;
+        color: var(--ink);
+        padding: 0 1.1rem;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .btn.primary {
+        border-color: var(--purple);
+        background: var(--purple);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(111, 66, 255, 0.24);
+      }
+
+      .btn.full {
+        width: 100%;
+      }
+
+      .feishu-dot {
+        width: 1.1rem;
+        height: 1.1rem;
+        border-radius: 0.32rem;
+        background: linear-gradient(135deg, #2f6bff, #00c8a4);
+        display: inline-block;
+      }
+
+      .account {
+        display: grid;
+        gap: 0.2rem;
+        padding: 0.9rem;
+        border-radius: 0.9rem;
+        background: var(--soft);
+      }
+
+      .main {
+        min-width: 0;
+        padding: 2rem clamp(1rem, 3vw, 2.4rem) 4rem;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2rem;
+        padding: 0 0.75rem;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--purple-dark);
+        font-weight: 900;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 1.2rem;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow);
+      }
+
+      .profile {
+        padding: clamp(1.1rem, 3vw, 1.8rem);
+      }
+
+      .student-name {
+        margin-bottom: 0.85rem;
+        font-size: clamp(1.75rem, 5vw, 3.6rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        padding: 0.45rem 0.7rem;
+        color: var(--muted);
+        font-weight: 850;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+        padding: 1.1rem;
+      }
+
+      .stat {
+        min-height: 7rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: #fff;
+        padding: 1.1rem;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-weight: 850;
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: clamp(2.1rem, 4.6vw, 2.9rem);
+        line-height: 1;
+      }
+
+      .tabs {
+        position: sticky;
+        top: 0;
+        z-index: 8;
+        display: none;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.55rem;
+        border: 1px solid var(--line);
+        border-radius: 1.1rem;
+        background: rgba(246, 248, 252, 0.94);
+        backdrop-filter: blur(16px);
+      }
+
+      .tabs button {
+        flex: 1;
+        min-height: 3rem;
+        border: 0;
+        border-radius: 0.85rem;
+        background: transparent;
+        color: var(--muted);
+        font-weight: 950;
+        cursor: pointer;
+      }
+
+      .tabs button.active {
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .guidance {
+        margin: 0;
+        border: 1px solid rgba(111, 66, 255, 0.16);
+        border-radius: 1.2rem;
+        background: #f3efff;
+        color: var(--purple-dark);
+        padding: 1rem 1.2rem;
+        font-size: clamp(1.05rem, 2.5vw, 1.22rem);
+        line-height: 1.55;
+        font-weight: 900;
+      }
+
+      .timeline,
+      .activity-list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .list-note {
+        margin: 1.1rem 0 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+
+      .term-card {
+        overflow: hidden;
+      }
+
+      .term-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      /* Three levels of heading colour: term = blue, category = purple,
+         record titles stay ink, so groups read apart from their contents. */
+      .term-head h3 {
+        margin: 0;
+        color: var(--blue);
+        font-size: 1.25rem;
+      }
+
+      .category-card .term-head h3 {
+        color: var(--purple-dark);
+      }
+
+      .term-head h3 small {
+        display: block;
+        margin-top: 0.15rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 850;
+      }
+
+      .term-total {
+        color: var(--muted);
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .course-row {
+        display: grid;
+        grid-template-columns: minmax(12rem, 1.3fr) minmax(9rem, 0.85fr) 5.5rem 6.2rem;
+        gap: 0.8rem;
+        align-items: center;
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .course-row:last-child {
+        border-bottom: 0;
+      }
+
+      .course-title,
+      .activity-name {
+        font-weight: 950;
+      }
+
+      .course-code,
+      .school,
+      .activity-note,
+      .activity-time,
+      .activity-hours {
+        color: var(--muted);
+        font-weight: 760;
+      }
+
+      .status,
+      .activity-status {
+        display: inline-flex;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.86rem;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      .done {
+        background: #e7f7ef;
+        color: var(--green);
+      }
+
+      .now {
+        background: #eaf0ff;
+        color: var(--blue);
+      }
+
+      .next {
+        background: #fff4db;
+        color: #a26000;
+      }
+
+      .planned {
+        background: #f0e8ff;
+        color: var(--purple-dark);
+      }
+
+      .activity-row {
+        display: grid;
+        /* Category now lives in the group header, so the row is five columns */
+        grid-template-columns: minmax(9rem, 1.5fr) 7rem 6.5rem 4.5rem minmax(8rem, 1.3fr);
+        gap: 0.8rem;
+        align-items: center;
+        padding: 0.95rem 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .activity-row:last-child {
+        border-bottom: 0;
+      }
+
+      .empty {
+        min-height: 26rem;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        color: var(--muted);
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .login-page {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+      }
+
+      .login-card {
+        width: min(58rem, 100%);
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        overflow: hidden;
+      }
+
+      .login-art {
+        display: grid;
+        align-content: space-between;
+        min-height: 30rem;
+        padding: 2rem;
+        background:
+          linear-gradient(135deg, rgba(111, 66, 255, 0.9), rgba(48, 87, 243, 0.82)),
+          url("/wp-content/uploads/2024/06/微信图片_20240603112349-1024x573.png") center / cover;
+        color: #fff;
+      }
+
+      .login-art img {
+        width: 13rem;
+        filter: brightness(0) invert(1);
+      }
+
+      .login-body {
+        padding: clamp(1.4rem, 4vw, 3rem);
+        background: #fff;
+      }
+
+      .login-body h1 {
+        font-size: clamp(2.4rem, 7vw, 4.3rem);
+      }
+
+      .loading-card {
+        display: grid;
+        justify-items: center;
+        /* .login-page stretches its child on phones — that is for the login
+           card, this one stays centred */
+        align-self: center;
+        gap: 0.4rem;
+        width: min(26rem, 100%);
+        padding: 2.6rem 2rem;
+        text-align: center;
+      }
+
+      .loading-card p {
+        margin: 0;
+      }
+
+      /* Surfaced only once the session check has run long enough to look
+         stuck, so a normal fast load never shows it */
+      .loading-card .loading-hint {
+        margin-top: 0.9rem;
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.7rem;
+        background: #fff4db;
+        color: #a26000;
+        font-size: 0.95rem;
+        font-weight: 850;
+      }
+
+      .loading-title {
+        font-size: 1.25rem;
+        font-weight: 900;
+      }
+
+      .spinner {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-bottom: 0.9rem;
+        border: 3px solid rgba(111, 66, 255, 0.18);
+        border-top-color: var(--purple);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .spinner {
+          animation-duration: 2.4s;
+        }
+      }
+
+      .error-box {
+        margin-top: 1rem;
+        padding: 0.8rem;
+        border-radius: 0.9rem;
+        background: #fff2f0;
+        color: #b42318;
+        font-weight: 850;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* Sidebar folds into a header bar well before the tables stop fitting:
+         with a 23rem sidebar the content column is too narrow for the
+         activity table until ~1240px, so collapsing here (rather than at
+         980px) is what keeps the desktop table layout usable on laptops. */
+      @media (max-width: 1240px) {
+        .shell {
+          grid-template-columns: 1fr;
+        }
+
+        /* Sidebar collapses to a slim header bar so content starts near the top */
+        /* Only the tab bar stays pinned on phones — two sticky bars eat too
+           much of a small screen, and the header height varies with the
+           student switcher. */
+        .side {
+          position: relative;
+          height: auto;
+          overflow: visible;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.6rem 0.75rem;
+          padding: 0.7rem 0.9rem;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .side-title,
+        .brand .eyebrow {
+          display: none;
+        }
+
+        .brand {
+          gap: 0;
+        }
+
+        .brand img {
+          width: 8.5rem;
+        }
+
+        /* Dissolve the panel so the account chip, switcher and logout lay out
+           directly on the header row instead of nesting a second flex box */
+        .panel {
+          display: contents;
+        }
+
+        /* Row 1 is the logo and logout; the account chip and student switcher
+           share row 2, which keeps long names from displacing the button. */
+        .side .account {
+          order: 2;
+          flex: 0 1 auto;
+          min-width: 0;
+          padding: 0.35rem 0.6rem;
+          border-radius: 0.6rem;
+          font-size: 0.92rem;
+        }
+
+        /* Long account names must not push the logout button onto its own row */
+        .side .account strong {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .side .account .muted {
+          display: none;
+        }
+
+        /* Beats .btn.full's width:100% */
+        .side-logout.btn.full {
+          flex-shrink: 0;
+          width: auto;
+          margin-left: auto;
+          min-height: 2.3rem;
+          margin-top: 0;
+          padding: 0 0.7rem;
+          font-size: 0.9rem;
+        }
+
+        /* Student switcher drops below the account row, not between it and
+           the logout button (order keeps the first line intact) */
+        .side .field {
+          order: 2;
+          flex: 1 1 11rem;
+          gap: 0;
+          margin-top: 0;
+          font-size: 0;
+        }
+
+        .side .field select {
+          min-height: 2.6rem;
+          font-size: 0.95rem;
+        }
+
+        .topbar,
+        .side-nav {
+          display: none;
+        }
+
+        .tabs {
+          display: flex;
+        }
+      }
+
+      /* Tables turn into cards once they stop fitting the full-width content
+         column. Width alone can't tell a narrow desktop window from a phone
+         held sideways, so touch devices (pointer: coarse) switch at a much
+         wider 1100px — a six-column table is unreadable on a handset even
+         when it technically fits. */
+      @media (max-width: 820px), (max-width: 1100px) and (pointer: coarse) {
+        .hero,
+        .login-card {
+          grid-template-columns: 1fr;
+        }
+
+        .login-art {
+          min-height: 16rem;
+        }
+
+        /* Course row → two-column card: title + status, then school + credits */
+        .course-row {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 0.35rem 0.6rem;
+          padding: 0.85rem 0.9rem;
+        }
+
+        .course-row > :nth-child(1) {
+          grid-column: 1;
+          grid-row: 1;
+        }
+
+        .course-row > .status {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+          align-self: start;
+        }
+
+        .course-row > .school {
+          grid-column: 1;
+          grid-row: 2;
+          align-self: center;
+        }
+
+        .course-row > .credits {
+          grid-column: 2;
+          grid-row: 2;
+          justify-self: end;
+          align-self: center;
+          white-space: nowrap;
+        }
+
+        /* Activity row → name + status, then time/hours, then note */
+        .activity-row {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 0.3rem 0.6rem;
+          padding: 0.9rem;
+        }
+
+        .activity-row > .activity-name {
+          grid-column: 1;
+          grid-row: 1;
+        }
+
+        .activity-row > .activity-status {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+          align-self: start;
+        }
+
+        .activity-row > .activity-time {
+          grid-column: 1;
+          grid-row: 2;
+        }
+
+        .activity-row > .activity-hours {
+          grid-column: 2;
+          grid-row: 2;
+          justify-self: end;
+          white-space: nowrap;
+        }
+
+        .activity-row > .activity-note {
+          grid-column: 1 / -1;
+          grid-row: 3;
+        }
+
+        .activity-row > .activity-note:empty {
+          display: none;
+        }
+      }
+
+      /* Phone typography — also applied to handsets in landscape, which are
+         wider than 560px but still read at arm's length. */
+      @media (max-width: 560px), (max-width: 950px) and (pointer: coarse) {
+        .main {
+          padding: 1rem 0.75rem 1.25rem;
+        }
+
+        .empty {
+          min-height: 12rem;
+        }
+
+        .stats {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.7rem;
+          padding: 0.8rem;
+        }
+
+        .stat {
+          min-height: 6.2rem;
+          padding: 0.95rem;
+        }
+
+        /* Keep secondary text readable on phones instead of shrinking it */
+        .stat span,
+        .term-total,
+        .tag,
+        .course-code,
+        .school,
+        .activity-time,
+        .activity-hours,
+        .activity-note {
+          font-size: 0.95rem;
+        }
+
+        .stat strong {
+          font-size: 2.35rem;
+        }
+
+        .course-title,
+        .activity-name {
+          font-size: 1.06rem;
+          line-height: 1.35;
+        }
+
+        .status,
+        .activity-status {
+          font-size: 0.9rem;
+          padding: 0.3rem 0.6rem;
+        }
+
+        .student-name {
+          font-size: 2.15rem;
+        }
+
+        .term-head {
+          padding: 0.85rem 0.9rem;
+        }
+
+        .term-head h3 {
+          font-size: 1.15rem;
+        }
+
+        .guidance {
+          padding: 0.85rem 0.9rem;
+          font-size: 1rem;
+        }
+
+        .tabs {
+          border-radius: 0.95rem;
+        }
+
+        .tabs button {
+          font-size: 1rem;
+        }
+
+        .login-page {
+          align-items: stretch;
+        }
+
+        .login-art {
+          min-height: 13rem;
+          padding: 1.2rem;
+        }
+
+        .login-art img {
+          width: 11rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="login-page">
+      <!-- Shown until /api/session answers, so a signed-in refresh never
+           flashes the sign-in prompt at someone who is already signed in -->
+      <div id="loadingCard" class="loading-card card">
+        <span class="spinner" aria-hidden="true"></span>
+        <p class="loading-title">正在登录…</p>
+        <p class="muted">正在确认你的飞书登录状态，请稍候</p>
+        <p id="loadingHint" class="loading-hint hidden">网络较慢，请稍后…</p>
+      </div>
+      <div id="loginCard" class="login-card card hidden">
+        <div class="login-art">
+          <img src="/assets/beecoming-portal/logo.png" alt="Beecoming" />
+          <div>
+            <p class="eyebrow" style="color: rgba(255,255,255,.78)">Beecoming Student Portal</p>
+            <h1>学生档案</h1>
+          </div>
+        </div>
+        <div class="login-body">
+          <p class="eyebrow">飞书账号登录</p>
+          <h1>查看课程与课外活动</h1>
+          <p class="muted">学生登录后只能看到自己的档案；家长登录后只能看到已绑定孩子的档案。</p>
+          <a id="loginButton" class="btn primary full" href="#"><span class="feishu-dot"></span>使用飞书账号登录</a>
+          <div id="statusText" class="error-box hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Which backend this page talks to, resolved in order:
+      //   1. ?api=<origin> — allowlisted origins only, for exercising a new
+      //      backend from production without switching everyone over
+      //   2. API_BY_HOST — per-frontend-hostname mapping
+      //   3. DEFAULT_API_BASE
+      //
+      // Serving the API from a beecoming.com subdomain makes it same-site with
+      // the page, so the session cookie stops being a third-party cookie —
+      // which is what Safari blocks by default. Uncomment the API_BY_HOST
+      // entries once that host is live and CORS/callback are pointed at it.
+      const DEFAULT_API_BASE = "https://beecoming-student-portal.chaihuanzhen.chatgpt.site";
+      const API_BY_HOST = {
+        // "www.beecoming.com": "https://portal-api.beecoming.com",
+        // "beecoming.com": "https://portal-api.beecoming.com",
+      };
+      const ALLOWED_API_ORIGINS = [DEFAULT_API_BASE, "https://portal-api.beecoming.com"];
+
+      const API_BASE = (() => {
+        const requested = new URLSearchParams(location.search).get("api");
+        if (requested) {
+          const origin = requested.replace(/\/+$/, "");
+          // Allowlisted only: this page sends credentials, and ?api= is
+          // attacker-supplied on a crafted link
+          if (ALLOWED_API_ORIGINS.includes(origin)) return origin;
+          console.warn("忽略未在白名单中的 ?api= 地址：", requested);
+        }
+        return API_BY_HOST[location.hostname] || DEFAULT_API_BASE;
+      })();
+      const CATEGORIES = ["Education Program", "Internship", "Extracurricular Activities", "Volunteer", "Awards"];
+      const CATEGORY_LABELS = {
+        "Education Program": "教育项目",
+        "Internship": "实习",
+        "Extracurricular Activities": "课外活动",
+        "Volunteer": "志愿服务",
+        "Awards": "奖项",
+      };
+      const ACTIVITY_STATUSES = ["进行中", "已完成", "待完成", "已确定会安排"];
+
+      const app = document.getElementById("app");
+      const loadingCard = document.getElementById("loadingCard");
+      const loadingHint = document.getElementById("loadingHint");
+      const loginCard = document.getElementById("loginCard");
+      const statusText = document.getElementById("statusText");
+      const loginButton = document.getElementById("loginButton");
+      loginButton.href = `${API_BASE}/api/auth/feishu/start?return_to=${encodeURIComponent(location.href)}`;
+
+      // Signing out returns to the site root — www.beecoming.com in production —
+      // rather than back here, which would only show the sign-in card again.
+      const LOGOUT_HREF = `${API_BASE}/api/logout?return_to=${encodeURIComponent(location.origin + "/")}`;
+
+      // Set by the site header's 用户登录 link, meaning "take me to Feishu",
+      // as opposed to someone opening the portal directly.
+      const WANTS_LOGIN = new URLSearchParams(location.search).has("login");
+      const LOGIN_BOUNCE_KEY = "beecomingPortalLoginBounce";
+      // sessionStorage throws in some privacy modes; a failure here must not
+      // take the page down, it just means we do not auto-forward.
+      const loginBounce = {
+        seen() { try { return !!sessionStorage.getItem(LOGIN_BOUNCE_KEY); } catch { return true; } },
+        mark() { try { sessionStorage.setItem(LOGIN_BOUNCE_KEY, "1"); } catch {} },
+        clear() { try { sessionStorage.removeItem(LOGIN_BOUNCE_KEY); } catch {} },
+      };
+
+      let db = null;
+      let activeTab = localStorage.getItem("beecomingPortalTab") || "courses";
+      let selectedStudentId = localStorage.getItem("beecomingPortalStudent") || "";
+
+      const escapeHtml = (value) =>
+        String(value ?? "").replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        })[char]);
+
+      const number = (value) => Number(value) || 0;
+      const formatNumber = (value) => {
+        const parsed = number(value);
+        return Number.isInteger(parsed) ? String(parsed) : parsed.toFixed(1);
+      };
+
+      const studentId = (student) => student?.id || student?.sourceName || "";
+      const studentLabel = (student) => {
+        if (!student) return "";
+        if (student.chineseName && student.englishName) return `${student.chineseName} / ${student.englishName}`;
+        return student.preferredName || student.englishName || student.chineseName || student.sourceName || student.id || "";
+      };
+
+      const parseTerm = (term = "") => {
+        const match = String(term).match(/(20\d{2})\s*(spring|summer|fall|winter)/i);
+        const order = { winter: 0, spring: 1, summer: 2, fall: 3 };
+        return match ? Number(match[1]) * 10 + order[match[2].toLowerCase()] : 99999;
+      };
+
+      // The Bitable holds both "2024Fall" and "2024 Fall"; render one spelling
+      // and group on it, so the two do not become separate terms.
+      const formatTerm = (term = "") => {
+        const match = String(term).trim().match(/^(20\d{2})\s*(spring|summer|fall|winter)$/i);
+        if (!match) return String(term).trim();
+        const season = match[2].toLowerCase();
+        return `${match[1]} ${season[0].toUpperCase()}${season.slice(1)}`;
+      };
+
+      const statusClass = (status = "") => ({
+        "已完成": "done",
+        "进行中": "now",
+        "待完成": "next",
+        "待确认": "next",
+        "已确定会安排": "planned",
+      }[status] || "next");
+
+      const normalizeActivityStatus = (status = "") => ACTIVITY_STATUSES.includes(status) ? status : "待完成";
+
+      const SLOW_SESSION_MS = 5000;
+
+      async function loadSession() {
+        const slowTimer = setTimeout(() => loadingHint.classList.remove("hidden"), SLOW_SESSION_MS);
+        try {
+          const response = await fetch(`${API_BASE}/api/session`, {
+            credentials: "include",
+            cache: "no-store",
+          });
+          if (response.status === 401) {
+            showLogin("");
+            return;
+          }
+          if (response.status === 403) {
+            showLogin("这个飞书账号还没有绑定学生，请联系 Beecoming 老师在账号绑定表里设置。");
+            return;
+          }
+          if (!response.ok) throw new Error("后台暂时没有连接成功，请稍后重试。");
+          db = await response.json();
+          loginBounce.clear();
+          renderPortal();
+        } catch (error) {
+          showLogin(error.message || "后台暂时没有连接成功，请稍后重试。");
+        } finally {
+          clearTimeout(slowTimer);
+        }
+      }
+
+      function showLogin(message) {
+        loadingCard.classList.add("hidden");
+
+        // Came from the header's 用户登录: forward straight to Feishu instead
+        // of asking for a second click. Once per tab only — if we land back
+        // here still signed out (a blocked third-party cookie, say), show the
+        // card rather than bouncing between the two forever.
+        if (!message && WANTS_LOGIN) {
+          if (!loginBounce.seen()) {
+            loginBounce.mark();
+            location.replace(loginButton.href);
+            return;
+          }
+          message = "登录没有完成，请再点一次下面的按钮试试。";
+        }
+
+        loginCard.classList.remove("hidden");
+        if (message) {
+          statusText.textContent = message;
+          statusText.classList.remove("hidden");
+        } else {
+          statusText.classList.add("hidden");
+        }
+      }
+
+      function sortedStudents() {
+        return [...(db?.students || [])].sort((a, b) =>
+          String(a.cohort || "").localeCompare(String(b.cohort || ""), "zh-Hans-CN", { numeric: true }) ||
+          String(a.englishName || a.preferredName || a.chineseName || "").localeCompare(String(b.englishName || b.preferredName || b.chineseName || ""), "en", { sensitivity: "base" })
+        );
+      }
+
+      function getSelectedStudent() {
+        const students = sortedStudents();
+        return students.find((student) => studentId(student) === selectedStudentId) || students[0] || null;
+      }
+
+      function studentCourses(student) {
+        return (db?.courses || [])
+          .filter((course) => course.studentId === studentId(student))
+          .sort((a, b) => String(a.title || a.rawCourse || a.courseCode || "").localeCompare(String(b.title || b.rawCourse || b.courseCode || ""), "en", { numeric: true, sensitivity: "base" }));
+      }
+
+      function studentActivities(student) {
+        return (db?.activities || [])
+          .filter((activity) => activity.studentId === studentId(student))
+          .sort((a, b) => `${a.activityTime || ""} ${a.category || ""} ${a.name || ""}`.localeCompare(`${b.activityTime || ""} ${b.category || ""} ${b.name || ""}`, "zh-Hans-CN", { numeric: true, sensitivity: "base" }));
+      }
+
+      function renderPortal() {
+        const students = sortedStudents();
+        const student = getSelectedStudent();
+        if (!student) {
+          app.className = "empty";
+          app.textContent = "暂时没有学生数据";
+          return;
+        }
+
+        const courses = studentCourses(student);
+        const activities = studentActivities(student);
+        const summary = activeTab === "activities" ? activitySummary(activities) : creditSummary(courses);
+
+        app.className = "shell";
+        app.innerHTML = `
+          <aside class="side">
+            <div class="brand">
+              <img src="/assets/beecoming-portal/logo.png" alt="Beecoming" />
+              <div>
+                <p class="eyebrow">Beecoming Student Portal</p>
+                <h2 class="side-title">学生档案</h2>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="account">
+                <strong>${escapeHtml(db.user?.name || "已登录账号")}</strong>
+                <span class="muted">${escapeHtml(roleLabel(db.user?.role))}账号 · 可查看 ${students.length} 个学生</span>
+              </div>
+              ${students.length > 1 ? studentSelect(students, student) : ""}
+            </div>
+            <nav class="side-nav">
+              <button type="button" class="${activeTab === "courses" ? "active" : ""}" data-tab="courses"><span>课程</span><b>${courses.length}</b></button>
+              <button type="button" class="${activeTab === "activities" ? "active" : ""}" data-tab="activities"><span>课外活动</span><b>${activities.length}</b></button>
+            </nav>
+            <a class="btn full side-logout" href="${LOGOUT_HREF}">退出登录</a>
+          </aside>
+          <main class="main">
+            <div class="topbar">
+              <span class="pill">只读档案</span>
+              <a class="btn" href="${LOGOUT_HREF}">退出登录</a>
+            </div>
+            <section class="hero">
+              <article class="profile card">
+                <p class="eyebrow">Student Profile</p>
+                <h1 class="student-name">${escapeHtml(studentLabel(student))}</h1>
+                <div class="tags">
+                  <span class="tag">${escapeHtml(student.cohort || "未分届")}</span>
+                  <span class="tag">${escapeHtml(student.campus || "未填校区")}</span>
+                  <span class="tag">${escapeHtml(student.currentGrade || "未填年级")}</span>
+                  <span class="tag">${escapeHtml(student.studentStatus || "状态未填")}</span>
+                </div>
+              </article>
+              <aside class="stats card">${summary}</aside>
+            </section>
+            <nav class="tabs">
+              <button type="button" class="${activeTab === "courses" ? "active" : ""}" data-tab="courses">课程 ${courses.length}</button>
+              <button type="button" class="${activeTab === "activities" ? "active" : ""}" data-tab="activities">课外活动 ${activities.length}</button>
+            </nav>
+            <section id="content">${activeTab === "activities" ? renderActivities(activities) : renderCourses(courses, student)}</section>
+          </main>
+        `;
+
+        app.querySelectorAll("[data-tab]").forEach((button) => {
+          button.addEventListener("click", () => {
+            activeTab = button.dataset.tab;
+            localStorage.setItem("beecomingPortalTab", activeTab);
+            renderPortal();
+          });
+        });
+
+        const select = app.querySelector("#studentSelect");
+        if (select) {
+          select.addEventListener("change", (event) => {
+            selectedStudentId = event.target.value;
+            localStorage.setItem("beecomingPortalStudent", selectedStudentId);
+            renderPortal();
+          });
+        }
+      }
+
+      function roleLabel(role = "") {
+        if (role === "student") return "学生";
+        if (role === "admin") return "老师";
+        return "家长";
+      }
+
+      function studentSelect(students, selectedStudent) {
+        return `
+          <label class="field">我的孩子
+            <select id="studentSelect">
+              ${students.map((student) => `
+                <option value="${escapeHtml(studentId(student))}" ${studentId(student) === studentId(selectedStudent) ? "selected" : ""}>
+                  ${escapeHtml(studentLabel(student))} · ${escapeHtml(student.cohort || "未分届")} · ${escapeHtml(student.campus || "未填校区")}
+                </option>
+              `).join("")}
+            </select>
+          </label>
+        `;
+      }
+
+      function creditSummary(courses) {
+        const totals = courses.reduce((sum, course) => {
+          if (course.status === "已完成") sum.done += number(course.credits);
+          else if (course.status === "进行中") sum.now += number(course.credits);
+          else if (course.status === "待完成") sum.next += number(course.credits);
+          sum.all += number(course.credits);
+          return sum;
+        }, { done: 0, now: 0, next: 0, all: 0 });
+        return `
+          ${stat("已完成学分", totals.done)}
+          ${stat("进行中学分", totals.now)}
+          ${stat("待完成学分", totals.next)}
+          ${stat("总预计学分", totals.done + totals.now + totals.next)}
+        `;
+      }
+
+      function activityStats(activities) {
+        return activities.reduce((sum, activity) => {
+          const status = normalizeActivityStatus(activity.status);
+          if (status === "已完成") sum.done += 1;
+          if (status === "进行中") sum.now += 1;
+          if (status === "待完成") sum.next += 1;
+          if (status === "已确定会安排") sum.planned += 1;
+          if (activity.category === "Volunteer") sum.volunteerHours += number(activity.volunteerHours);
+          return sum;
+        }, { done: 0, now: 0, next: 0, planned: 0, volunteerHours: 0 });
+      }
+
+      function activitySummary(activities) {
+        const totals = activityStats(activities);
+        return `
+          ${stat("活动进度", `${totals.done + totals.now + totals.planned}/20`)}
+          ${stat("已完成", totals.done)}
+          ${stat("进行中", totals.now)}
+          ${stat("已确定会安排", totals.planned)}
+          ${stat("志愿者小时", totals.volunteerHours)}
+        `;
+      }
+
+      function stat(label, value) {
+        return `<div class="stat"><span>${escapeHtml(label)}</span><strong>${typeof value === "number" ? formatNumber(value) : escapeHtml(value)}</strong></div>`;
+      }
+
+      function renderCourses(courses, student) {
+        const terms = [...new Set(
+          [...(student.terms || []), ...courses.map((course) => course.term).filter(Boolean)].map(formatTerm)
+        )].sort((a, b) => parseTerm(a) - parseTerm(b) || String(a).localeCompare(String(b)));
+        if (!terms.length) return `<div class="empty card">这个学生暂时没有课程记录</div>`;
+        return `<div class="timeline">${terms.map((term) => {
+          const items = courses.filter((course) => formatTerm(course.term) === term);
+          const credits = items.reduce((sum, course) => sum + number(course.credits), 0);
+          return `
+            <article class="term-card card">
+              <div class="term-head"><h3>${escapeHtml(term)}</h3><div class="term-total">${items.length} 门课 · ${formatNumber(credits)} 学分</div></div>
+              ${items.map((course) => `
+                <div class="course-row">
+                  <div><div class="course-title">${escapeHtml(course.title || "未填写课程")}</div><div class="course-code">${escapeHtml(course.courseCode || "无代码")}</div></div>
+                  <div class="school">${escapeHtml(course.school || "未填写学校")}</div>
+                  <div class="credits"><strong>${formatNumber(course.credits)}</strong> 学分</div>
+                  <span class="status ${statusClass(course.status)}">${escapeHtml(course.status || "待完成")}</span>
+                </div>
+              `).join("") || `<div class="empty">这个学期暂时没有课程</div>`}
+            </article>
+          `;
+        }).join("")}</div>
+        <p class="list-note">更多课程记录将在选课后更新</p>`;
+      }
+
+      const GUIDANCE = "目标 UCLA/UCB 需要至少准备 20 个课外活动，申请时再做筛选。目标私校需要有标化考试：托福、雅思或多邻国；SAT 若能有，会更有加分。";
+
+      function renderActivities(activities) {
+        if (!activities.length) {
+          return `
+            <div class="activity-list">
+              <p class="guidance">${GUIDANCE}</p>
+              <div class="empty card">暂时没有课外活动记录</div>
+            </div>
+          `;
+        }
+
+        const categoryOf = (activity) => activity.category || "未分类";
+        // Known categories keep their canonical order; anything else follows.
+        const groups = [
+          ...CATEGORIES.filter((category) => activities.some((activity) => categoryOf(activity) === category)),
+          ...[...new Set(activities.map(categoryOf))].filter((category) => !CATEGORIES.includes(category)),
+        ];
+
+        return `
+          <div class="activity-list">
+            <p class="guidance">${GUIDANCE}</p>
+            ${groups.map((category) => {
+              const items = activities.filter((activity) => categoryOf(activity) === category);
+              const hours = items.reduce((sum, activity) => sum + number(activity.volunteerHours), 0);
+              return `
+                <article class="term-card category-card card">
+                  <div class="term-head">
+                    <h3>${escapeHtml(category)}${CATEGORY_LABELS[category] ? `<small>${escapeHtml(CATEGORY_LABELS[category])}</small>` : ""}</h3>
+                    <div class="term-total">${items.length} 条${hours ? ` · ${formatNumber(hours)} 小时` : ""}</div>
+                  </div>
+                  ${items.map((activity) => `
+                    <div class="activity-row">
+                      <div class="activity-name">${escapeHtml(activity.name || "未填写活动名字")}</div>
+                      <span class="activity-status ${statusClass(normalizeActivityStatus(activity.status))}">${escapeHtml(normalizeActivityStatus(activity.status))}</span>
+                      <div class="activity-time">${escapeHtml(formatTerm(activity.activityTime) || "未填写时间")}</div>
+                      <div class="activity-hours">${number(activity.volunteerHours) ? `${formatNumber(activity.volunteerHours)} 小时` : ""}</div>
+                      <div class="activity-note">${escapeHtml(activity.note || "暂无备注")}</div>
+                    </div>
+                  `).join("")}
+                </article>
+              `;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      loadSession();
+    </script>
+  </body>
+</html>
