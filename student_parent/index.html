@@ -427,7 +427,9 @@
 
       .activity-row {
         display: grid;
-        grid-template-columns: 11rem 7.5rem minmax(13rem, 1fr) 8rem 6rem minmax(10rem, 1fr);
+        /* Floor is ~46rem so the six columns still fit once the sidebar
+           collapses; wider columns overflowed on 1280px laptops. */
+        grid-template-columns: minmax(7rem, 0.9fr) 7rem minmax(9rem, 1.4fr) 6.5rem 4.5rem minmax(8rem, 1.3fr);
         gap: 0.8rem;
         align-items: center;
         padding: 0.95rem 1rem;
@@ -501,7 +503,11 @@
         display: none !important;
       }
 
-      @media (max-width: 980px) {
+      /* Sidebar folds into a header bar well before the tables stop fitting:
+         with a 23rem sidebar the content column is too narrow for the
+         activity table until ~1240px, so collapsing here (rather than at
+         980px) is what keeps the desktop table layout usable on laptops. */
+      @media (max-width: 1240px) {
         .shell {
           grid-template-columns: 1fr;
         }
@@ -585,6 +591,14 @@
           font-size: 0.95rem;
         }
 
+        .topbar {
+          display: none;
+        }
+      }
+
+      /* Tables turn into cards only once they genuinely stop fitting the
+         full-width content column — not merely because the sidebar folded. */
+      @media (max-width: 820px) {
         .hero,
         .login-card {
           grid-template-columns: 1fr;
@@ -592,10 +606,6 @@
 
         .login-art {
           min-height: 16rem;
-        }
-
-        .topbar {
-          display: none;
         }
 
         /* Course row → two-column card: title + status, then school + credits */
