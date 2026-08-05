@@ -48,7 +48,10 @@
       }
 
       .shell {
+        /* dvh tracks the visible area; on mobile Safari 100vh is the
+           toolbar-collapsed height, which pads dead space below the content */
         min-height: 100vh;
+        min-height: 100dvh;
         display: grid;
         grid-template-columns: 23rem minmax(0, 1fr);
       }
@@ -57,6 +60,7 @@
         position: sticky;
         top: 0;
         height: 100vh;
+        height: 100dvh;
         padding: 2rem 1.5rem;
         border-right: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.88);
@@ -453,6 +457,7 @@
 
       .login-page {
         min-height: 100vh;
+        min-height: 100dvh;
         display: grid;
         place-items: center;
         padding: 1rem;
@@ -694,7 +699,11 @@
          wider than 560px but still read at arm's length. */
       @media (max-width: 560px), (max-width: 950px) and (pointer: coarse) {
         .main {
-          padding: 1rem 0.75rem 3rem;
+          padding: 1rem 0.75rem 1.25rem;
+        }
+
+        .empty {
+          min-height: 12rem;
         }
 
         .stats {
