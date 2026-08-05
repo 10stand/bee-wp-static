@@ -53,19 +53,64 @@
         min-height: 100vh;
         min-height: 100dvh;
         display: grid;
-        grid-template-columns: 23rem minmax(0, 1fr);
+        grid-template-columns: 20rem minmax(0, 1fr);
       }
 
+      /* Anchored at both ends: brand on top, logout at the bottom, so the
+         column reads as deliberate rather than as a half-empty panel. */
       .side {
         position: sticky;
         top: 0;
         height: 100vh;
         height: 100dvh;
-        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1.4rem;
         border-right: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.88);
         backdrop-filter: blur(18px);
         overflow: auto;
+      }
+
+      /* Section switcher lives in the sidebar while there is a sidebar; the
+         horizontal .tabs bar takes over once it folds into a header. */
+      .side-nav {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 1.6rem;
+      }
+
+      .side-nav button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        min-height: 3rem;
+        padding: 0 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 0.9rem;
+        background: #fff;
+        color: var(--ink);
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .side-nav button b {
+        color: var(--muted);
+      }
+
+      .side-nav button.active {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .side-nav button.active b {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .side-logout {
+        margin-top: auto;
       }
 
       .brand {
@@ -278,7 +323,7 @@
         position: sticky;
         top: 0;
         z-index: 8;
-        display: flex;
+        display: none;
         gap: 0.5rem;
         margin-bottom: 1rem;
         padding: 0.55rem;
@@ -537,6 +582,7 @@
           height: auto;
           overflow: visible;
           display: flex;
+          flex-direction: row;
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
@@ -559,56 +605,68 @@
           width: 8.5rem;
         }
 
+        /* Dissolve the panel so the account chip, switcher and logout lay out
+           directly on the header row instead of nesting a second flex box */
         .panel {
-          flex: 1 1 auto;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: flex-end;
-          gap: 0.5rem 0.6rem;
-          margin-top: 0;
-          padding: 0;
-          border: 0;
-          border-radius: 0;
-          background: none;
-          box-shadow: none;
+          display: contents;
         }
 
-        .panel .account {
-          padding: 0.3rem 0.6rem;
+        /* Row 1 is the logo and logout; the account chip and student switcher
+           share row 2, which keeps long names from displacing the button. */
+        .side .account {
+          order: 2;
+          flex: 0 1 auto;
+          min-width: 0;
+          padding: 0.35rem 0.6rem;
           border-radius: 0.6rem;
           font-size: 0.92rem;
         }
 
-        .panel .account .muted {
+        /* Long account names must not push the logout button onto its own row */
+        .side .account strong {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .side .account .muted {
           display: none;
         }
 
-        .panel .btn.full {
+        /* Beats .btn.full's width:100% */
+        .side-logout.btn.full {
+          flex-shrink: 0;
           width: auto;
+          margin-left: auto;
           min-height: 2.3rem;
-          margin-top: 0 !important;
+          margin-top: 0;
           padding: 0 0.7rem;
           font-size: 0.9rem;
         }
 
         /* Student switcher drops below the account row, not between it and
            the logout button (order keeps the first line intact) */
-        .panel .field {
+        .side .field {
           order: 2;
-          flex: 1 1 100%;
+          flex: 1 1 11rem;
           gap: 0;
           margin-top: 0;
           font-size: 0;
         }
 
-        .panel .field select {
+        .side .field select {
           min-height: 2.6rem;
           font-size: 0.95rem;
         }
 
-        .topbar {
+        .topbar,
+        .side-nav {
           display: none;
+        }
+
+        .tabs {
+          display: flex;
         }
       }
 
@@ -971,8 +1029,12 @@
                 <span class="muted">${escapeHtml(roleLabel(db.user?.role))}账号 · 可查看 ${students.length} 个学生</span>
               </div>
               ${students.length > 1 ? studentSelect(students, student) : ""}
-              <a class="btn full" style="margin-top: 1rem" href="${API_BASE}/api/logout?return_to=${encodeURIComponent(location.href)}">退出登录</a>
             </div>
+            <nav class="side-nav">
+              <button type="button" class="${activeTab === "courses" ? "active" : ""}" data-tab="courses"><span>课程</span><b>${courses.length}</b></button>
+              <button type="button" class="${activeTab === "activities" ? "active" : ""}" data-tab="activities"><span>课外活动</span><b>${activities.length}</b></button>
+            </nav>
+            <a class="btn full side-logout" href="${API_BASE}/api/logout?return_to=${encodeURIComponent(location.href)}">退出登录</a>
           </aside>
           <main class="main">
             <div class="topbar">
