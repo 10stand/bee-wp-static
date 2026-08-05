@@ -506,22 +506,83 @@
           grid-template-columns: 1fr;
         }
 
+        /* Sidebar collapses to a slim header bar so content starts near the top */
+        /* Only the tab bar stays pinned on phones — two sticky bars eat too
+           much of a small screen, and the header height varies with the
+           student switcher. */
         .side {
           position: relative;
           height: auto;
-          padding: 1.1rem;
+          overflow: visible;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.6rem 0.75rem;
+          padding: 0.7rem 0.9rem;
           border-right: 0;
           border-bottom: 1px solid var(--line);
         }
 
         .side-title,
-        .panel .muted {
+        .brand .eyebrow {
           display: none;
         }
 
+        .brand {
+          gap: 0;
+        }
+
+        .brand img {
+          width: 8.5rem;
+        }
+
         .panel {
-          margin-top: 0.85rem;
+          flex: 1 1 auto;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 0.5rem 0.6rem;
+          margin-top: 0;
+          padding: 0;
+          border: 0;
+          border-radius: 0;
+          background: none;
           box-shadow: none;
+        }
+
+        .panel .account {
+          padding: 0.3rem 0.6rem;
+          border-radius: 0.6rem;
+          font-size: 0.92rem;
+        }
+
+        .panel .account .muted {
+          display: none;
+        }
+
+        .panel .btn.full {
+          width: auto;
+          min-height: 2.3rem;
+          margin-top: 0 !important;
+          padding: 0 0.7rem;
+          font-size: 0.9rem;
+        }
+
+        /* Student switcher drops below the account row, not between it and
+           the logout button (order keeps the first line intact) */
+        .panel .field {
+          order: 2;
+          flex: 1 1 100%;
+          gap: 0;
+          margin-top: 0;
+          font-size: 0;
+        }
+
+        .panel .field select {
+          min-height: 2.6rem;
+          font-size: 0.95rem;
         }
 
         .hero,
@@ -533,17 +594,85 @@
           min-height: 16rem;
         }
 
-        .course-row,
-        .activity-row {
-          grid-template-columns: 1fr;
-        }
-
-        .school,
-        .activity-note {
-          font-size: 0.95rem;
-        }
-
         .topbar {
+          display: none;
+        }
+
+        /* Course row → two-column card: title + status, then school + credits */
+        .course-row {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 0.35rem 0.6rem;
+          padding: 0.85rem 0.9rem;
+        }
+
+        .course-row > :nth-child(1) {
+          grid-column: 1;
+          grid-row: 1;
+        }
+
+        .course-row > .status {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+          align-self: start;
+        }
+
+        .course-row > .school {
+          grid-column: 1;
+          grid-row: 2;
+          align-self: center;
+        }
+
+        .course-row > .credits {
+          grid-column: 2;
+          grid-row: 2;
+          justify-self: end;
+          align-self: center;
+          white-space: nowrap;
+        }
+
+        /* Activity row → category + status, then name, meta, note */
+        .activity-row {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 0.3rem 0.6rem;
+          padding: 0.9rem;
+        }
+
+        .activity-row > .activity-category {
+          grid-column: 1;
+          grid-row: 1;
+          align-self: center;
+        }
+
+        .activity-row > .activity-status {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+        }
+
+        .activity-row > .activity-name {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+
+        .activity-row > .activity-time {
+          grid-column: 1;
+          grid-row: 3;
+        }
+
+        .activity-row > .activity-hours {
+          grid-column: 2;
+          grid-row: 3;
+          justify-self: end;
+          white-space: nowrap;
+        }
+
+        .activity-row > .activity-note {
+          grid-column: 1 / -1;
+          grid-row: 4;
+        }
+
+        .activity-row > .activity-note:empty {
           display: none;
         }
       }
@@ -553,35 +682,85 @@
           padding: 1rem 0.75rem 3rem;
         }
 
-        .brand img {
-          width: 12rem;
-        }
-
         .stats {
           grid-template-columns: 1fr 1fr;
           padding: 0.7rem;
         }
 
         .stat {
-          min-height: 5rem;
+          min-height: 4.6rem;
           padding: 0.72rem;
         }
 
+        /* Keep secondary text readable on phones instead of shrinking it */
         .stat span,
         .term-total,
         .tag,
         .course-code,
-        .school {
-          font-size: 0.85rem;
+        .school,
+        .activity-time,
+        .activity-hours,
+        .activity-note {
+          font-size: 0.95rem;
+        }
+
+        .stat strong {
+          font-size: 1.9rem;
+        }
+
+        .course-title,
+        .activity-name {
+          font-size: 1.06rem;
+          line-height: 1.35;
+        }
+
+        .activity-category {
+          font-size: 0.95rem;
+        }
+
+        .status,
+        .activity-status {
+          font-size: 0.9rem;
+          padding: 0.3rem 0.6rem;
         }
 
         .student-name {
           font-size: 2.15rem;
         }
 
+        .term-head {
+          padding: 0.85rem 0.9rem;
+        }
+
+        .term-head h3 {
+          font-size: 1.15rem;
+        }
+
+        .section-head {
+          padding: 0.9rem 0.9rem 0;
+        }
+
+        .guidance {
+          padding: 0.85rem 0.9rem;
+          font-size: 1rem;
+        }
+
+        .category-pills {
+          gap: 0.45rem;
+          padding: 0.85rem 0.9rem;
+        }
+
+        .category-pills span {
+          padding: 0.42rem 0.7rem;
+          font-size: 0.9rem;
+        }
+
         .tabs {
-          top: 0;
           border-radius: 0.95rem;
+        }
+
+        .tabs button {
+          font-size: 1rem;
         }
 
         .login-page {
@@ -880,7 +1059,7 @@
                 <div class="course-row">
                   <div><div class="course-title">${escapeHtml(course.title || "未填写课程")}</div><div class="course-code">${escapeHtml(course.courseCode || "无代码")}</div></div>
                   <div class="school">${escapeHtml(course.school || "未填写学校")}</div>
-                  <div><strong>${formatNumber(course.credits)}</strong> 学分</div>
+                  <div class="credits"><strong>${formatNumber(course.credits)}</strong> 学分</div>
                   <span class="status ${statusClass(course.status)}">${escapeHtml(course.status || "待完成")}</span>
                 </div>
               `).join("") || `<div class="empty">这个学期暂时没有课程</div>`}
