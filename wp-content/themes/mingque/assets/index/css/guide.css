@@ -125,22 +125,33 @@
       }
     }
 
+    /* 与站内 header.css 的 .h_tab 同一套布局：全宽、左右 40px 内边距，
+       logo 与栏目成组靠左（logo 右间距 80px），CTA 靠右。 */
     .nav {
-      width: min(1180px, calc(100% - 32px));
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 1920px;
       margin: 0 auto;
-      min-height: 88px;
+      height: 88px;
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      margin-right: 80px;
       font-weight: 800;
       letter-spacing: 0;
+      flex-shrink: 0;
     }
 
     .brand-logo {
@@ -1128,9 +1139,20 @@
       /* 原本整条隐藏，家长进来后就没有回首页的入口了；改为可横滑的一行 */
       .nav {
         flex-wrap: wrap;
+        height: auto;
         min-height: 0;
-        padding: 12px 0;
+        padding: 12px 20px;
         gap: 10px;
+      }
+
+      .nav-left {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .brand {
+        margin-right: 0;
       }
 
       .nav-links {
