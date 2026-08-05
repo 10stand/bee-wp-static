@@ -349,44 +349,16 @@
         color: #fff;
       }
 
-      .section-head {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 1rem 1rem 0;
-      }
-
-      .section-head h3 {
-        margin-bottom: 0.6rem;
-        font-size: 1.35rem;
-      }
-
       .guidance {
         margin: 0;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
+        border: 1px solid rgba(111, 66, 255, 0.16);
+        border-radius: 1.2rem;
         background: #f3efff;
         color: var(--purple-dark);
-        padding: 1rem;
+        padding: 1rem 1.2rem;
         font-size: clamp(1.05rem, 2.5vw, 1.22rem);
         line-height: 1.55;
         font-weight: 900;
-      }
-
-      .category-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-        padding: 1rem;
-      }
-
-      .category-pills span {
-        border-radius: 999px;
-        background: #f1eaff;
-        color: var(--purple-dark);
-        padding: 0.5rem 0.8rem;
-        font-weight: 950;
       }
 
       .timeline,
@@ -487,18 +459,16 @@
 
       .activity-row {
         display: grid;
-        /* Floor is ~46rem so the six columns still fit once the sidebar
-           collapses; wider columns overflowed on 1280px laptops. */
-        grid-template-columns: minmax(7rem, 0.9fr) 7rem minmax(9rem, 1.4fr) 6.5rem 4.5rem minmax(8rem, 1.3fr);
+        /* Category now lives in the group header, so the row is five columns */
+        grid-template-columns: minmax(9rem, 1.5fr) 7rem 6.5rem 4.5rem minmax(8rem, 1.3fr);
         gap: 0.8rem;
         align-items: center;
         padding: 0.95rem 1rem;
-        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
       }
 
-      .activity-category {
-        color: var(--purple-dark);
-        font-weight: 950;
+      .activity-row:last-child {
+        border-bottom: 0;
       }
 
       .empty {
@@ -718,45 +688,40 @@
           white-space: nowrap;
         }
 
-        /* Activity row → category + status, then name, meta, note */
+        /* Activity row → name + status, then time/hours, then note */
         .activity-row {
           grid-template-columns: minmax(0, 1fr) auto;
           gap: 0.3rem 0.6rem;
           padding: 0.9rem;
         }
 
-        .activity-row > .activity-category {
+        .activity-row > .activity-name {
           grid-column: 1;
           grid-row: 1;
-          align-self: center;
         }
 
         .activity-row > .activity-status {
           grid-column: 2;
           grid-row: 1;
           justify-self: end;
-        }
-
-        .activity-row > .activity-name {
-          grid-column: 1 / -1;
-          grid-row: 2;
+          align-self: start;
         }
 
         .activity-row > .activity-time {
           grid-column: 1;
-          grid-row: 3;
+          grid-row: 2;
         }
 
         .activity-row > .activity-hours {
           grid-column: 2;
-          grid-row: 3;
+          grid-row: 2;
           justify-self: end;
           white-space: nowrap;
         }
 
         .activity-row > .activity-note {
           grid-column: 1 / -1;
-          grid-row: 4;
+          grid-row: 3;
         }
 
         .activity-row > .activity-note:empty {
@@ -808,10 +773,6 @@
           line-height: 1.35;
         }
 
-        .activity-category {
-          font-size: 0.95rem;
-        }
-
         .status,
         .activity-status {
           font-size: 0.9rem;
@@ -830,23 +791,9 @@
           font-size: 1.15rem;
         }
 
-        .section-head {
-          padding: 0.9rem 0.9rem 0;
-        }
-
         .guidance {
           padding: 0.85rem 0.9rem;
           font-size: 1rem;
-        }
-
-        .category-pills {
-          gap: 0.45rem;
-          padding: 0.85rem 0.9rem;
-        }
-
-        .category-pills span {
-          padding: 0.42rem 0.7rem;
-          font-size: 0.9rem;
         }
 
         .tabs {
@@ -1167,26 +1114,50 @@
         <p class="list-note">更多课程记录将在选课后更新</p>`;
       }
 
+      const GUIDANCE = "目标 UCLA/UCB 需要至少准备 20 个课外活动，申请时再做筛选。目标私校需要有标化考试：托福、雅思或多邻国；SAT 若能有，会更有加分。";
+
       function renderActivities(activities) {
-        const counts = CATEGORIES
-          .map((category) => ({ category, count: activities.filter((activity) => activity.category === category).length }))
-          .filter((item) => item.count);
+        if (!activities.length) {
+          return `
+            <div class="activity-list">
+              <p class="guidance">${GUIDANCE}</p>
+              <div class="empty card">暂时没有课外活动记录</div>
+            </div>
+          `;
+        }
+
+        const categoryOf = (activity) => activity.category || "未分类";
+        // Known categories keep their canonical order; anything else follows.
+        const groups = [
+          ...CATEGORIES.filter((category) => activities.some((activity) => categoryOf(activity) === category)),
+          ...[...new Set(activities.map(categoryOf))].filter((category) => !CATEGORIES.includes(category)),
+        ];
+
         return `
-          <article class="card">
-            <div class="section-head"><h3>课外活动</h3><div class="term-total">${activities.length} 条记录</div></div>
-            <p class="guidance">目标 UCLA/UCB 需要至少准备 20 个课外活动，申请时再做筛选。目标私校需要有标化考试：托福、雅思或多邻国；SAT 若能有，会更有加分。</p>
-            ${counts.length ? `<div class="category-pills">${counts.map((item) => `<span>${escapeHtml(item.category)} ${item.count}</span>`).join("")}</div>` : ""}
-            ${activities.length ? activities.map((activity) => `
-              <div class="activity-row">
-                <div class="activity-category">${escapeHtml(activity.category || "未分类")}</div>
-                <span class="activity-status ${statusClass(normalizeActivityStatus(activity.status))}">${escapeHtml(normalizeActivityStatus(activity.status))}</span>
-                <div class="activity-name">${escapeHtml(activity.name || "未填写活动名字")}</div>
-                <div class="activity-time">${escapeHtml(activity.activityTime || "未填写时间")}</div>
-                <div class="activity-hours">${activity.category === "Volunteer" ? `${formatNumber(activity.volunteerHours)} 小时` : " "}</div>
-                <div class="activity-note">${escapeHtml(activity.note || "暂无备注")}</div>
-              </div>
-            `).join("") : `<div class="empty">暂时没有课外活动记录</div>`}
-          </article>
+          <div class="activity-list">
+            <p class="guidance">${GUIDANCE}</p>
+            ${groups.map((category) => {
+              const items = activities.filter((activity) => categoryOf(activity) === category);
+              const hours = items.reduce((sum, activity) => sum + number(activity.volunteerHours), 0);
+              return `
+                <article class="term-card card">
+                  <div class="term-head">
+                    <h3>${escapeHtml(category)}</h3>
+                    <div class="term-total">${items.length} 条${hours ? ` · ${formatNumber(hours)} 小时` : ""}</div>
+                  </div>
+                  ${items.map((activity) => `
+                    <div class="activity-row">
+                      <div class="activity-name">${escapeHtml(activity.name || "未填写活动名字")}</div>
+                      <span class="activity-status ${statusClass(normalizeActivityStatus(activity.status))}">${escapeHtml(normalizeActivityStatus(activity.status))}</span>
+                      <div class="activity-time">${escapeHtml(activity.activityTime || "未填写时间")}</div>
+                      <div class="activity-hours">${number(activity.volunteerHours) ? `${formatNumber(activity.volunteerHours)} 小时` : ""}</div>
+                      <div class="activity-note">${escapeHtml(activity.note || "暂无备注")}</div>
+                    </div>
+                  `).join("")}
+                </article>
+              `;
+            }).join("")}
+          </div>
         `;
       }
 
