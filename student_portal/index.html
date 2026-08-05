@@ -918,7 +918,34 @@
     </div>
 
     <script>
-      const API_BASE = "https://beecoming-student-portal.chaihuanzhen.chatgpt.site";
+      // Which backend this page talks to, resolved in order:
+      //   1. ?api=<origin> — allowlisted origins only, for exercising a new
+      //      backend from production without switching everyone over
+      //   2. API_BY_HOST — per-frontend-hostname mapping
+      //   3. DEFAULT_API_BASE
+      //
+      // Serving the API from a beecoming.com subdomain makes it same-site with
+      // the page, so the session cookie stops being a third-party cookie —
+      // which is what Safari blocks by default. Uncomment the API_BY_HOST
+      // entries once that host is live and CORS/callback are pointed at it.
+      const DEFAULT_API_BASE = "https://beecoming-student-portal.chaihuanzhen.chatgpt.site";
+      const API_BY_HOST = {
+        // "www.beecoming.com": "https://portal-api.beecoming.com",
+        // "beecoming.com": "https://portal-api.beecoming.com",
+      };
+      const ALLOWED_API_ORIGINS = [DEFAULT_API_BASE, "https://portal-api.beecoming.com"];
+
+      const API_BASE = (() => {
+        const requested = new URLSearchParams(location.search).get("api");
+        if (requested) {
+          const origin = requested.replace(/\/+$/, "");
+          // Allowlisted only: this page sends credentials, and ?api= is
+          // attacker-supplied on a crafted link
+          if (ALLOWED_API_ORIGINS.includes(origin)) return origin;
+          console.warn("忽略未在白名单中的 ?api= 地址：", requested);
+        }
+        return API_BY_HOST[location.hostname] || DEFAULT_API_BASE;
+      })();
       const CATEGORIES = ["Education Program", "Internship", "Extracurricular Activities", "Volunteer", "Awards"];
       const CATEGORY_LABELS = {
         "Education Program": "教育项目",
