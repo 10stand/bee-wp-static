@@ -969,6 +969,15 @@
         return match ? Number(match[1]) * 10 + order[match[2].toLowerCase()] : 99999;
       };
 
+      // The Bitable holds both "2024Fall" and "2024 Fall"; render one spelling
+      // and group on it, so the two do not become separate terms.
+      const formatTerm = (term = "") => {
+        const match = String(term).trim().match(/^(20\d{2})\s*(spring|summer|fall|winter)$/i);
+        if (!match) return String(term).trim();
+        const season = match[2].toLowerCase();
+        return `${match[1]} ${season[0].toUpperCase()}${season.slice(1)}`;
+      };
+
       const statusClass = (status = "") => ({
         "已完成": "done",
         "进行中": "now",
@@ -1185,11 +1194,12 @@
       }
 
       function renderCourses(courses, student) {
-        const terms = [...new Set([...(student.terms || []), ...courses.map((course) => course.term).filter(Boolean)])]
-          .sort((a, b) => parseTerm(a) - parseTerm(b) || String(a).localeCompare(String(b)));
+        const terms = [...new Set(
+          [...(student.terms || []), ...courses.map((course) => course.term).filter(Boolean)].map(formatTerm)
+        )].sort((a, b) => parseTerm(a) - parseTerm(b) || String(a).localeCompare(String(b)));
         if (!terms.length) return `<div class="empty card">这个学生暂时没有课程记录</div>`;
         return `<div class="timeline">${terms.map((term) => {
-          const items = courses.filter((course) => course.term === term);
+          const items = courses.filter((course) => formatTerm(course.term) === term);
           const credits = items.reduce((sum, course) => sum + number(course.credits), 0);
           return `
             <article class="term-card card">
@@ -1243,7 +1253,7 @@
                     <div class="activity-row">
                       <div class="activity-name">${escapeHtml(activity.name || "未填写活动名字")}</div>
                       <span class="activity-status ${statusClass(normalizeActivityStatus(activity.status))}">${escapeHtml(normalizeActivityStatus(activity.status))}</span>
-                      <div class="activity-time">${escapeHtml(activity.activityTime || "未填写时间")}</div>
+                      <div class="activity-time">${escapeHtml(formatTerm(activity.activityTime) || "未填写时间")}</div>
                       <div class="activity-hours">${number(activity.volunteerHours) ? `${formatNumber(activity.volunteerHours)} 小时` : ""}</div>
                       <div class="activity-note">${escapeHtml(activity.note || "暂无备注")}</div>
                     </div>
