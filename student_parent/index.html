@@ -247,16 +247,19 @@
       .stats {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.7rem;
-        padding: 1rem;
+        gap: 0.8rem;
+        padding: 1.1rem;
       }
 
       .stat {
-        min-height: 5.5rem;
+        min-height: 7rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         border: 1px solid var(--line);
         border-radius: 1rem;
         background: #fff;
-        padding: 0.85rem;
+        padding: 1.1rem;
       }
 
       .stat span {
@@ -266,8 +269,8 @@
 
       .stat strong {
         display: block;
-        margin-top: 0.4rem;
-        font-size: clamp(1.75rem, 4vw, 2.45rem);
+        margin-top: 0.5rem;
+        font-size: clamp(2.1rem, 4.6vw, 2.9rem);
         line-height: 1;
       }
 
@@ -345,6 +348,14 @@
       .activity-list {
         display: grid;
         gap: 1rem;
+      }
+
+      .list-note {
+        margin: 1.1rem 0 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 800;
       }
 
       .term-card {
@@ -708,12 +719,13 @@
 
         .stats {
           grid-template-columns: 1fr 1fr;
-          padding: 0.7rem;
+          gap: 0.7rem;
+          padding: 0.8rem;
         }
 
         .stat {
-          min-height: 4.6rem;
-          padding: 0.72rem;
+          min-height: 6.2rem;
+          padding: 0.95rem;
         }
 
         /* Keep secondary text readable on phones instead of shrinking it */
@@ -729,7 +741,7 @@
         }
 
         .stat strong {
-          font-size: 1.9rem;
+          font-size: 2.35rem;
         }
 
         .course-title,
@@ -1089,7 +1101,8 @@
               `).join("") || `<div class="empty">这个学期暂时没有课程</div>`}
             </article>
           `;
-        }).join("")}</div>`;
+        }).join("")}</div>
+        <p class="list-note">更多课程记录将在选课后更新</p>`;
       }
 
       function renderActivities(activities) {
