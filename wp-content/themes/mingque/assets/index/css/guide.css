@@ -55,7 +55,6 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       background: #fff;
     }
 
@@ -134,20 +133,21 @@
       margin: 0 auto;
       height: 88px;
       padding: 0 40px;
+      /* 与 .h_tab 一致：1px 下边框计入 88px，内容区 87px，CTA 因此为 47px */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
 
     .nav-left {
       display: flex;
-      align-items: center;
     }
 
     .brand {
       display: flex;
       align-items: center;
+      align-self: center;
       margin-right: 80px;
       font-weight: 800;
       letter-spacing: 0;
@@ -176,7 +176,7 @@
     }
 
     .nav-links a {
-      min-height: 88px;
+      height: 87px;
       display: inline-flex;
       align-items: center;
       border-bottom: 4px solid transparent;
@@ -214,27 +214,41 @@
       transition: all 0.18s ease;
     }
 
+    /* 逐项对齐站内 header.css 的 .tab_right：14px/40px 内边距、上下 20px 外边距、
+       分隔线 #794EFF、gap 8px，最终高度 47px 与站内一致 */
     .nav-cta {
-      border-left: 1px solid var(--p);
-      background: transparent;
-      color: var(--p);
-      border-top: 0;
-      border-right: 0;
-      border-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-sizing: content-box;
+      min-height: 0;
+      padding: 14px 0 14px 40px;
+      margin: 20px 0;
+      border: 0;
+      border-left: 1px solid var(--794EFF, #794EFF);
       border-radius: 0;
-      padding-left: 34px;
-      padding-right: 0;
-      min-height: 48px;
+      background: transparent;
+      color: #794EFF;
       font-family: "PingFang SC", sans-serif;
       font-size: 16px;
       font-weight: 600;
+      line-height: 20px;
+      white-space: nowrap;
+      box-shadow: none;
+      transition: none;
     }
 
-    .nav-cta::after {
-      content: "→";
-      font-family: "Lato", sans-serif;
-      font-weight: 900;
-      margin-left: 4px;
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      background: transparent;
+      color: #794EFF;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .nav-cta svg {
+      flex-shrink: 0;
     }
 
     .button:hover,
@@ -1110,6 +1124,16 @@
 
     .disclaimer p {
       margin: 0;
+    }
+
+    /* 980–1180px：站内因 body{min-width:1200} 从不渲染这个区间，本页是响应式的，
+       收紧留白让六个栏目仍排成一行，不换行。 */
+    @media (max-width: 1180px) {
+      .nav { padding: 0 24px; }
+      .brand { margin-right: 32px; }
+      .brand-logo { width: 170px; }
+      .nav-links { gap: 22px; font-size: 17px; }
+      .nav-cta { padding-left: 24px; margin-left: 8px; }
     }
 
     @media (max-width: 980px) {
