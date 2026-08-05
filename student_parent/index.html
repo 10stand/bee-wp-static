@@ -388,9 +388,24 @@
         border-bottom: 1px solid var(--line);
       }
 
+      /* Three levels of heading colour: term = blue, category = purple,
+         record titles stay ink, so groups read apart from their contents. */
       .term-head h3 {
         margin: 0;
+        color: var(--blue);
         font-size: 1.25rem;
+      }
+
+      .category-card .term-head h3 {
+        color: var(--purple-dark);
+      }
+
+      .term-head h3 small {
+        display: block;
+        margin-top: 0.15rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 850;
       }
 
       .term-total {
@@ -842,6 +857,13 @@
     <script>
       const API_BASE = "https://beecoming-student-portal.chaihuanzhen.chatgpt.site";
       const CATEGORIES = ["Education Program", "Internship", "Extracurricular Activities", "Volunteer", "Awards"];
+      const CATEGORY_LABELS = {
+        "Education Program": "教育项目",
+        "Internship": "实习",
+        "Extracurricular Activities": "课外活动",
+        "Volunteer": "志愿服务",
+        "Awards": "奖项",
+      };
       const ACTIVITY_STATUSES = ["进行中", "已完成", "待完成", "已确定会安排"];
 
       const app = document.getElementById("app");
@@ -1140,9 +1162,9 @@
               const items = activities.filter((activity) => categoryOf(activity) === category);
               const hours = items.reduce((sum, activity) => sum + number(activity.volunteerHours), 0);
               return `
-                <article class="term-card card">
+                <article class="term-card category-card card">
                   <div class="term-head">
-                    <h3>${escapeHtml(category)}</h3>
+                    <h3>${escapeHtml(category)}${CATEGORY_LABELS[category] ? `<small>${escapeHtml(CATEGORY_LABELS[category])}</small>` : ""}</h3>
                     <div class="term-total">${items.length} 条${hours ? ` · ${formatNumber(hours)} 小时` : ""}</div>
                   </div>
                   ${items.map((activity) => `
