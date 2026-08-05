@@ -964,6 +964,22 @@
       const loginButton = document.getElementById("loginButton");
       loginButton.href = `${API_BASE}/api/auth/feishu/start?return_to=${encodeURIComponent(location.href)}`;
 
+      // Signing out returns to the site root — www.beecoming.com in production —
+      // rather than back here, which would only show the sign-in card again.
+      const LOGOUT_HREF = `${API_BASE}/api/logout?return_to=${encodeURIComponent(location.origin + "/")}`;
+
+      // Set by the site header's 用户登录 link, meaning "take me to Feishu",
+      // as opposed to someone opening the portal directly.
+      const WANTS_LOGIN = new URLSearchParams(location.search).has("login");
+      const LOGIN_BOUNCE_KEY = "beecomingPortalLoginBounce";
+      // sessionStorage throws in some privacy modes; a failure here must not
+      // take the page down, it just means we do not auto-forward.
+      const loginBounce = {
+        seen() { try { return !!sessionStorage.getItem(LOGIN_BOUNCE_KEY); } catch { return true; } },
+        mark() { try { sessionStorage.setItem(LOGIN_BOUNCE_KEY, "1"); } catch {} },
+        clear() { try { sessionStorage.removeItem(LOGIN_BOUNCE_KEY); } catch {} },
+      };
+
       let db = null;
       let activeTab = localStorage.getItem("beecomingPortalTab") || "courses";
       let selectedStudentId = localStorage.getItem("beecomingPortalStudent") || "";
@@ -1034,6 +1050,7 @@
           }
           if (!response.ok) throw new Error("后台暂时没有连接成功，请稍后重试。");
           db = await response.json();
+          loginBounce.clear();
           renderPortal();
         } catch (error) {
           showLogin(error.message || "后台暂时没有连接成功，请稍后重试。");
@@ -1044,6 +1061,20 @@
 
       function showLogin(message) {
         loadingCard.classList.add("hidden");
+
+        // Came from the header's 用户登录: forward straight to Feishu instead
+        // of asking for a second click. Once per tab only — if we land back
+        // here still signed out (a blocked third-party cookie, say), show the
+        // card rather than bouncing between the two forever.
+        if (!message && WANTS_LOGIN) {
+          if (!loginBounce.seen()) {
+            loginBounce.mark();
+            location.replace(loginButton.href);
+            return;
+          }
+          message = "登录没有完成，请再点一次下面的按钮试试。";
+        }
+
         loginCard.classList.remove("hidden");
         if (message) {
           statusText.textContent = message;
@@ -1111,12 +1142,12 @@
               <button type="button" class="${activeTab === "courses" ? "active" : ""}" data-tab="courses"><span>课程</span><b>${courses.length}</b></button>
               <button type="button" class="${activeTab === "activities" ? "active" : ""}" data-tab="activities"><span>课外活动</span><b>${activities.length}</b></button>
             </nav>
-            <a class="btn full side-logout" href="${API_BASE}/api/logout?return_to=${encodeURIComponent(location.href)}">退出登录</a>
+            <a class="btn full side-logout" href="${LOGOUT_HREF}">退出登录</a>
           </aside>
           <main class="main">
             <div class="topbar">
               <span class="pill">只读档案</span>
-              <a class="btn" href="${API_BASE}/api/logout?return_to=${encodeURIComponent(location.href)}">退出登录</a>
+              <a class="btn" href="${LOGOUT_HREF}">退出登录</a>
             </div>
             <section class="hero">
               <article class="profile card">

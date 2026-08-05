@@ -130,6 +130,25 @@ header {
 .h_tab .tab_right a {
   color: #794EFF;
 }
+.h_tab .tab_right .tab_apply {
+  display: flex;
+  align-items: center;
+}
+.h_tab .tab_right .tab_login {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 36px;
+  margin-left: 16px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--794EFF, #794EFF);
+  color: #fff;
+  white-space: nowrap;
+}
+.h_tab .tab_right .tab_login:hover {
+  background: #5f39d6;
+}
 .hb_box {
   display: none;
 }
