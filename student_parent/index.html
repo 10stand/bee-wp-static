@@ -596,9 +596,12 @@
         }
       }
 
-      /* Tables turn into cards only once they genuinely stop fitting the
-         full-width content column — not merely because the sidebar folded. */
-      @media (max-width: 820px) {
+      /* Tables turn into cards once they stop fitting the full-width content
+         column. Width alone can't tell a narrow desktop window from a phone
+         held sideways, so touch devices (pointer: coarse) switch at a much
+         wider 1100px — a six-column table is unreadable on a handset even
+         when it technically fits. */
+      @media (max-width: 820px), (max-width: 1100px) and (pointer: coarse) {
         .hero,
         .login-card {
           grid-template-columns: 1fr;
@@ -687,7 +690,9 @@
         }
       }
 
-      @media (max-width: 560px) {
+      /* Phone typography — also applied to handsets in landscape, which are
+         wider than 560px but still read at arm's length. */
+      @media (max-width: 560px), (max-width: 950px) and (pointer: coarse) {
         .main {
           padding: 1rem 0.75rem 3rem;
         }
