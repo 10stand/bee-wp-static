@@ -106,6 +106,14 @@
           },
           {
             "@type": "Question",
+            "name": "2027 Fall 的 UC 申请截止日期有变化吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "有。加州大学已将 2027 Fall 本科申请截止日期从上一申请季的 12 月 1 日调整为 2026 年 11 月 30 日。申请系统 2026 年 8 月 1 日开放，10 月 1 日至 11 月 30 日为正式递交期。转学申请方面，2027 Fall 的 TAG 窗口为 2026 年 9 月 1 日至 30 日，TAU 系统 2026 年 12 月 15 日开放、2027 年 1 月 31 日为优先提交截止。"
+            }
+          },
+          {
+            "@type": "Question",
             "name": "什么样的学生不能申请 UC TAG？",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -186,30 +194,70 @@
       background: #fff;
     }
 
+    /* 与官网一致的滚动条。官网用 jQuery 驱动，本页独立且不加载 jQuery，
+       因此用等效的纯 CSS 无限滚动实现，视觉与文案保持一致。 */
     .promo-bar {
       background: #6740E0;
       color: #fff;
-      min-height: 42px;
+      overflow: hidden;
+      padding: 11px 0;
+    }
+
+    .promo-track {
+      display: flex;
+      width: max-content;
+      animation: promo-scroll 32s linear infinite;
+    }
+
+    .promo-bar:hover .promo-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes promo-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .promo-track {
+        animation: none;
+      }
+    }
+
+    .promo-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 18px;
-      padding: 8px 20px;
-      font-size: 15px;
-      line-height: 1.3;
+      margin-left: 20px;
+      white-space: nowrap;
     }
 
     .promo-line {
       width: 40px;
       height: 1px;
-      background: rgba(255, 255, 255, 0.9);
-      flex: 0 0 auto;
+      margin-right: 32px;
+      background: #fff;
+      flex-shrink: 0;
     }
 
-    .promo-bar a {
+    .promo-item span {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    .promo-item svg {
+      padding: 0 12px;
+    }
+
+    .promo-bar a .yellow {
       color: var(--gold);
-      font-weight: 700;
-      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    @media (max-width: 750px) {
+      .promo-bar {
+        display: none;
+      }
     }
 
     .nav {
@@ -262,6 +310,11 @@
       color: #794EFF;
       border-bottom-color: #794EFF;
       outline: none;
+    }
+
+    .nav-links a.current {
+      color: #794EFF;
+      border-bottom-color: #794EFF;
     }
 
     .nav-cta,
@@ -1206,8 +1259,27 @@
         grid-template-columns: 1fr;
       }
 
+      /* 原本整条隐藏，家长进来后就没有回首页的入口了；改为可横滑的一行 */
+      .nav {
+        flex-wrap: wrap;
+        min-height: 0;
+        padding: 12px 0;
+        gap: 10px;
+      }
+
       .nav-links {
-        display: none;
+        order: 3;
+        width: 100%;
+        gap: 20px;
+        overflow-x: auto;
+        font-size: 15px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links a {
+        min-height: 38px;
+        border-bottom-width: 3px;
+        white-space: nowrap;
       }
 
       th {
@@ -1330,25 +1402,32 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="promo-bar">
-      <span class="promo-line" aria-hidden="true"></span>
-      <span>Beecoming美少班 · 美国大学少年班 2026秋季</span>
-      <span aria-hidden="true">››</span>
-      <a href="https://www.wjx.cn/vm/tiV2Uw4.aspx">立即申请</a>
-      <span class="promo-line" aria-hidden="true"></span>
+    <div class="promo-bar" aria-label="项目公告">
+      <!-- 两组相同内容，动画位移 50% 以实现无缝循环 -->
+      <div class="promo-track">
+        <div class="promo-item"><span class="promo-line" aria-hidden="true"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item"><span class="promo-line" aria-hidden="true"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item"><span class="promo-line" aria-hidden="true"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item"><span class="promo-line" aria-hidden="true"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item" aria-hidden="true"><span class="promo-line"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx" tabindex="-1"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item" aria-hidden="true"><span class="promo-line"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx" tabindex="-1"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item" aria-hidden="true"><span class="promo-line"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx" tabindex="-1"><span class="yellow">立即申请</span></a></div>
+        <div class="promo-item" aria-hidden="true"><span class="promo-line"></span><span>Beecoming美少班 2026秋季</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 8.33333V10L6 5L0 0V1.66667L4 5L0 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M5 8.33333V10L11 5L5 0V1.66667L9 5L5 8.33333Z" fill="white" fill-opacity="0.6"></path><path d="M10 10V8.33333L14 5L10 1.66667V0L16 5L10 10Z" fill="white" fill-opacity="0.6"></path></svg><a href="https://www.wjx.cn/vm/tiV2Uw4.aspx" tabindex="-1"><span class="yellow">立即申请</span></a></div>
+      </div>
     </div>
     <nav class="nav" aria-label="页面导航">
-      <a class="brand" href="https://beecoming.com/" aria-label="Beecoming美少班 首页">
+      <a class="brand" href="/" aria-label="Beecoming美少班 首页">
         <img class="brand-logo" src="/wp-content/themes/mingque/assets/index/image/logo.png" alt="Beecoming美少班">
         <span class="brand-fallback">Beecoming美少班</span>
       </a>
-      <div class="nav-links" aria-label="章节导航">
-        <a href="#overview">家长先看</a>
-        <a href="#timeline">时间线</a>
-        <a href="#comparison">6 校对比</a>
-        <a href="#news">资讯分享</a>
-        <a href="#faq">常见问题</a>
-        <a href="#consult">免费咨询</a>
+      <!-- 与站内其他页面一致的主导航，家长可以从这里回到首页 -->
+      <div class="nav-links" aria-label="主导航">
+        <a href="/">首页</a>
+        <a href="/campus">我们的校区</a>
+        <a href="/admits">升学成果</a>
+        <a class="current" href="/uc-tag-2026-2027" aria-current="page">家长必读</a>
+        <a href="/about">关于我们</a>
+        <a href="/verify">证书认证</a>
       </div>
       <a class="nav-cta" href="#consult">免费咨询</a>
     </nav>
@@ -1806,13 +1885,20 @@
             <span class="news-go">前往查询 →</span>
           </a>
 
+          <a class="news-card" href="https://mp.weixin.qq.com/s/cps0PvzfouSJlg9ZCgOuUg" rel="noopener" target="_blank">
+            <span class="news-kind">公众号</span>
+            <h3>2027 Fall 的 UC 申请截止日期为什么提前了？</h3>
+            <p>加州大学已更新 2027 Fall 本科申请时间线，截止日期由 12 月 1 日提前至 2026 年 11 月 30 日。文中同时列出大一与转学两条完整节点，含 TAG 申请窗口与 TAU 提交期限。</p>
+            <span class="news-go">阅读全文 →</span>
+          </a>
+
           <!--
             ▼▼▼ 公众号文章位（复制下面这块，替换标题、摘要和链接即可新增）▼▼▼
-            建议每篇文章都用「问题式标题」，中文 AI 更容易抽取并引用。
+            标题用「问题式」写法，中文 AI 抽取问答时更容易命中并引用。
 
-          <a class="news-card" href="公众号文章链接">
+          <a class="news-card" href="公众号文章链接" rel="noopener" target="_blank">
             <span class="news-kind">公众号</span>
-            <h3>文章标题</h3>
+            <h3>问题式标题？</h3>
             <p>一到两句摘要，包含家长会搜索的关键词。</p>
             <span class="news-go">阅读全文 →</span>
           </a>
@@ -1897,6 +1983,10 @@
           <article class="faq-item">
             <h3>UC TAG 什么时候申请？</h3>
             <p>2026-2027 周期的 TAG 申请通过 UC TAP 系统在 2025 年 9 月 1 日至 30 日提交。之后仍需在 2025 年 10 月 1 日至 12 月 1 日提交 UC 正式申请，并在 2026 年 1 月 31 日前提交 TAU 成绩更新。UC Merced 另接受 2027 春季 TAG，提交期为 2026 年 5 月 1 日至 31 日。</p>
+          </article>
+          <article class="faq-item">
+            <h3>2027 Fall 的 UC 申请截止日期有变化吗？</h3>
+            <p>有。加州大学已将 2027 Fall 本科申请截止日期从上一申请季的 12 月 1 日调整为 2026 年 11 月 30 日。申请系统 2026 年 8 月 1 日开放，10 月 1 日至 11 月 30 日为正式递交期。转学申请方面，2027 Fall 的 TAG 窗口为 2026 年 9 月 1 日至 30 日，TAU 系统 2026 年 12 月 15 日开放、2027 年 1 月 31 日为优先提交截止。</p>
           </article>
           <article class="faq-item">
             <h3>什么样的学生不能申请 UC TAG？</h3>

@@ -84,11 +84,23 @@ header {
   margin-top: 24px;
   margin-right: 80px;
 }
+/* 用 gap 排布而非固定宽度：加了第 6 个栏目后，450px 会把各项挤在一起 */
 .h_tab .tab_con {
   display: flex;
   align-items: center;
-  width: 450px;
-  justify-content: space-between;
+  gap: 36px;
+}
+/* 悬停时变色并显示下划线，让家长看得出可以点 */
+.h_tab .tab_con a span {
+  border-bottom: 4px solid transparent;
+  margin-bottom: -4px;
+  box-sizing: border-box;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.h_tab .tab_con a:hover span,
+.h_tab .tab_con a:focus-visible span {
+  color: var(--794EFF, #794EFF);
+  border-bottom-color: #794EFF;
 }
 .h_tab .tab_con span {
   color: var(--000000, #000);
