@@ -615,10 +615,9 @@
       border-bottom: 0;
     }
 
+    /* 不能用 position:sticky —— 外层 .table-shell 的 overflow-x:auto 会成为
+       sticky 的定位容器，表头会被推到容器内 130px 处，上方留白且排到首行之后 */
     th {
-      position: sticky;
-      top: 130px;
-      z-index: 5;
       background: var(--p-l);
       color: var(--p-d);
       font-size: 13px;
@@ -1131,9 +1130,6 @@
 
 
 
-      th {
-        top: 130px;
-      }
     }
 
     @media (max-width: 680px) {
