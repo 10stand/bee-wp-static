@@ -206,6 +206,9 @@
     }
 
     .hero {
+      /* 通用 section 有 80px 上下内边距，这里的留白由 .hero-inner 自己控制，
+         叠加会让定位栏与标题之间空出一大块 */
+      padding-top: 0;
       border-bottom: 1px solid var(--line);
       background: var(--white);
     }
@@ -213,8 +216,8 @@
     .hero-inner {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      min-height: 650px;
-      padding: 72px 0 58px;
+      min-height: 0;
+      padding: 36px 0 48px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
       gap: 48px;
@@ -1016,6 +1019,38 @@
       color: var(--p-d);
     }
 
+    /* 右下角常驻操作：返回顶部 + 免费咨询，上下堆叠 */
+    .float-top {
+      position: fixed;
+      right: 24px;
+      bottom: 84px;
+      z-index: 40;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--p);
+      box-shadow: 0 6px 20px rgba(29, 23, 74, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s, border-color 0.18s ease;
+    }
+
+    .float-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .float-top:hover {
+      border-color: var(--p);
+      background: var(--p-l);
+    }
+
     /* 滚动后出现的常驻咨询按钮 */
     .float-consult {
       position: fixed;
@@ -1050,6 +1085,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .float-top,
       .float-consult {
         transition: none;
       }
@@ -1076,7 +1112,7 @@
 
       .hero-inner {
         min-height: auto;
-        padding-top: 52px;
+        padding-top: 28px;
       }
 
       .insight-grid,
@@ -1122,7 +1158,7 @@
       }
 
       .hero-inner {
-        padding: 38px 0 34px;
+        padding: 22px 0 30px;
       }
 
       .hero-panel {
@@ -1151,6 +1187,13 @@
         min-height: 46px;
         padding: 0 18px;
         font-size: 14px;
+      }
+
+      .float-top {
+        right: 12px;
+        bottom: 68px;
+        width: 42px;
+        height: 42px;
       }
 
       .timeline {

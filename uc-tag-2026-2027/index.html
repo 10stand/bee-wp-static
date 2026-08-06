@@ -137,7 +137,7 @@
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/footer.css?ver=1.1">
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/header.css?ver=1.1">
   <script src="/wp-content/themes/mingque/assets/JQuery.js?ver=1.1"></script>
-  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=2.4">
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=2.6">
 </head>
 <body>
 <header>
@@ -525,7 +525,6 @@
         <a href="#campuses"><b>05</b>各校怎么读</a>
         <a href="#news"><b>06</b>资讯分享</a>
         <a href="#faq"><b>07</b>常见问题</a>
-        <a href="#consult"><b>08</b>免费咨询</a>
       </div>
     </nav>
     <section class="hero">
@@ -1288,6 +1287,11 @@
 </footer>
 
 
+  <button class="float-top" id="floatTop" type="button" aria-label="返回顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 16V5M10 5L5 10M10 5L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
   <a class="float-consult" id="floatConsult" href="#consult" aria-label="免费咨询 Beecoming美少班">免费咨询</a>
 
   <script>
@@ -1297,11 +1301,20 @@
       var consult = document.getElementById("consult");
       if (!btn || !consult) return;
 
+      var top = document.getElementById("floatTop");
+
       function update() {
         var past = window.scrollY > window.innerHeight * 0.6;
         var box = consult.getBoundingClientRect();
         var inConsult = box.top < window.innerHeight && box.bottom > 0;
         btn.classList.toggle("show", past && !inConsult);
+        if (top) top.classList.toggle("show", past);
+      }
+
+      if (top) {
+        top.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
       }
 
       update();
