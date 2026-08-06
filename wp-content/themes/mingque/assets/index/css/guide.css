@@ -1109,7 +1109,11 @@
     /* footer.css 按 content-box 编写（如 .foo_top_item_two 是 width:72px + padding:0 73px）。
        本页的 *{box-sizing:border-box} 会把 padding 算进宽度，内容宽被压成 1px，
        栏目文字变成竖排。在页脚范围内还原 content-box。 */
-    footer, footer * { box-sizing: content-box; }
+    /* 内部栏目需要 content-box（.foo_top_item_two 是 width:72px + padding:0 73px），
+       但 footer 自身必须保持 border-box —— 它的 height:433px 要含住 padding-top:80px，
+       否则整体高出 80px。 */
+    footer * { box-sizing: content-box; }
+    footer { box-sizing: border-box; }
     /* reset.css 给 body 设了 min-width:1200px（官网为桌面优先设计）。
        本页是响应式的，去掉这个下限，否则中等宽度会横向溢出。 */
     body { min-width: 0; }
