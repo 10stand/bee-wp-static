@@ -93,6 +93,15 @@
       align-items: center;
       margin-left: 20px;
       white-space: nowrap;
+      /* 本页 body 是 line-height:1.65，会被 <a> 继承成 26.4px，导致条高比站内多
+         6.4px。这里与站内 .h_box .item span 一样写死 20px。 */
+      line-height: 20px;
+    }
+
+    .promo-item a {
+      display: flex;
+      align-items: center;
+      line-height: 20px;
     }
 
     .promo-line {
@@ -179,6 +188,9 @@
       height: 87px;
       display: inline-flex;
       align-items: center;
+      align-self: flex-end;
+      /* 与站内 .purple 的 margin-bottom:-4px 效果一致：下划线压住条底边框 */
+      margin-bottom: -2px;
       border-bottom: 4px solid transparent;
     }
 
