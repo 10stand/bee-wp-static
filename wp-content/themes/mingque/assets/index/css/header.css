@@ -142,24 +142,48 @@ header {
 .h_tab .tab_right a {
   color: #794EFF;
 }
-.h_tab .tab_right .tab_apply {
-  display: flex;
-  align-items: center;
+/* 右侧为两个文字链接，中间一道竖线：立即申请 ｜ 用户登录 */
+.h_tab .tab_right .tab_sep {
+  width: 1px;
+  height: 18px;
+  flex-shrink: 0;
+  background: rgba(121, 78, 255, 0.4);
 }
 .h_tab .tab_right .tab_login {
-  display: inline-flex;
-  align-items: center;
   flex-shrink: 0;
-  min-height: 36px;
-  margin-left: 16px;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: var(--794EFF, #794EFF);
-  color: #fff;
+}
+.h_tab .tab_right a span {
+  margin-right: 0;
   white-space: nowrap;
 }
-.h_tab .tab_right .tab_login:hover {
-  background: #5f39d6;
+.h_tab .tab_right a:hover span {
+  color: #5f39d6;
+}
+/* 栏目宁可缩小字号，也不折行 */
+.h_tab .tab_con a span {
+  white-space: nowrap;
+}
+.h_tab .tab_ll {
+  min-width: 0;
+}
+.h_tab .tab_right {
+  flex-shrink: 0;
+}
+
+/* 窗口变窄时依次收紧字号与间距，保证一行放得下 */
+@media screen and (max-width: 1400px) {
+  .h_tab .tab_left { margin-right: 48px; }
+  .h_tab .tab_con { gap: 26px; }
+  .h_tab .tab_con span { font-size: 17px; }
+  .h_tab .tab_right { padding-left: 28px; }
+}
+@media screen and (max-width: 1280px) {
+  .h_tab { padding: 0 24px; }
+  .h_tab .tab_left { margin-right: 28px; }
+  .h_tab .tab_con { gap: 18px; }
+  .h_tab .tab_con span { font-size: 16px; }
+  .h_tab .tab_right { padding-left: 20px; font-size: 15px; }
+  .h_tab .tab_left img { width: 170px; height: auto; }
 }
 .hb_box {
   display: none;
