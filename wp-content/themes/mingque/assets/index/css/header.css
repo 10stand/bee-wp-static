@@ -256,18 +256,31 @@ header {
   height: 20px;
   margin-left: 20px;
 }
+/* 手机端同样是「立即申请 ｜ 用户登录」两个文字链接 */
 .hb_tab .hbt_btn {
-  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   height: 32px;
-  padding: 7px 0px 7px 20px;
+  padding: 7px 0px 7px 16px;
   box-sizing: border-box;
   border-left: 1px solid var(--794EFF, #794EFF);
   color: var(--794EFF, #794EFF);
   font-family: PingFang SC;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  white-space: nowrap;
+}
+.hb_tab .hbt_btn a {
+  color: var(--794EFF, #794EFF);
+}
+.hb_tab .hbt_sep {
+  width: 1px;
+  height: 14px;
+  flex-shrink: 0;
+  background: rgba(121, 78, 255, 0.4);
 }
 .hb_nav {
   display: none;
