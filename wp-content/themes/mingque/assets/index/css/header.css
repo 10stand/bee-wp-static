@@ -121,12 +121,12 @@ header {
 }
 .h_tab .tab_right {
   display: flex;
-  padding: 14px 0px 14px 40px;
+  padding: 14px 0px 14px 24px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  /*margin-left: 950px;*/
-  border-left: 1px solid var(--794EFF, #794EFF);
+  /* 间距由 .tab_sep 的外边距控制，让竖线在视觉上两侧等距 */
+  gap: 0;
+  /* 原本这里有一道竖线，现已移到两个链接之间 */
   color: var(--794EFF, #794EFF);
   font-family: PingFang SC;
   font-size: 16px;
@@ -142,15 +142,30 @@ header {
 .h_tab .tab_right a {
   color: #794EFF;
 }
-/* 右侧为两个文字链接，中间一道竖线：立即申请 ｜ 用户登录 */
+/* 右侧：立即申请 ｜ 用户登录。竖线与原先 tab_right 的左边线等高（47px） */
 .h_tab .tab_right .tab_sep {
   width: 1px;
-  height: 18px;
+  height: 47px;
   flex-shrink: 0;
-  background: rgba(121, 78, 255, 0.4);
+  /* 左 20px；右侧只留 6px，加上按钮自身 14px 内边距后，文字两侧同为 20px */
+  margin: 0 6px 0 20px;
+  background: var(--794EFF, #794EFF);
 }
+/* 用户登录做成实心按钮与纯文字的立即申请拉开层次 */
 .h_tab .tab_right .tab_login {
   flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--794EFF, #794EFF);
+}
+.h_tab .tab_right .tab_login span {
+  color: #fff;
+}
+.h_tab .tab_right .tab_login:hover {
+  background: #5f39d6;
+}
+.h_tab .tab_right .tab_login:hover span {
+  color: #fff;
 }
 .h_tab .tab_right a span {
   margin-right: 0;
@@ -260,11 +275,10 @@ header {
 .hb_tab .hbt_btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   height: 32px;
-  padding: 7px 0px 7px 16px;
+  padding: 7px 0px 7px 8px;
   box-sizing: border-box;
-  border-left: 1px solid var(--794EFF, #794EFF);
   color: var(--794EFF, #794EFF);
   font-family: PingFang SC;
   font-size: 13px;
@@ -278,9 +292,16 @@ header {
 }
 .hb_tab .hbt_sep {
   width: 1px;
-  height: 14px;
+  height: 32px;
   flex-shrink: 0;
-  background: rgba(121, 78, 255, 0.4);
+  margin: 0 4px 0 12px;
+  background: var(--794EFF, #794EFF);
+}
+.hb_tab .hbt_btn a[href*="student_portal"] {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--794EFF, #794EFF);
+  color: #fff;
 }
 .hb_nav {
   display: none;
