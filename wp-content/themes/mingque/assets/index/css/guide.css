@@ -37,6 +37,15 @@
 
     html {
       scroll-behavior: smooth;
+      /* 站内 header 是 fixed（桌面 130px / 手机 109px），锚点跳转需留出偏移，
+         否则目标标题会被头部盖住 */
+      scroll-padding-top: 130px;
+    }
+
+    @media (max-width: 750px) {
+      html {
+        scroll-padding-top: 109px;
+      }
     }
 
     body {
@@ -121,6 +130,79 @@
       color: var(--p-d);
       border-color: var(--p-d);
       box-shadow: none;
+    }
+
+    /* 章节定位栏：放在正文顶部的空白处，列出本页要点并可点击跳转 */
+    .section-nav {
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .section-nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-nav-label {
+      margin-right: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .section-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+    }
+
+    .section-nav a b {
+      font-family: "Lato", sans-serif;
+      font-weight: 900;
+      color: var(--p);
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      border-color: var(--p);
+      background: var(--p-l);
+      color: var(--p-d);
+      outline: none;
+    }
+
+    @media (max-width: 680px) {
+      .section-nav-inner {
+        width: min(100% - 24px, 1180px);
+        padding: 14px 0;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .section-nav-label {
+        display: none;
+      }
+
+      .section-nav a {
+        flex-shrink: 0;
+        padding: 7px 12px;
+        font-size: 13px;
+      }
     }
 
     .hero {

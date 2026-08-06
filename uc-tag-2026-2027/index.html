@@ -137,7 +137,7 @@
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/footer.css?ver=1.1">
   <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/header.css?ver=1.1">
   <script src="/wp-content/themes/mingque/assets/JQuery.js?ver=1.1"></script>
-  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=2.3">
+  <link rel="stylesheet" href="/wp-content/themes/mingque/assets/index/css/guide.css?ver=2.4">
 </head>
 <body>
 <header>
@@ -514,6 +514,20 @@
         });</script>
 
   <main>
+    <!-- 章节定位栏：让家长一眼看到本页有什么，并可直接跳转 -->
+    <nav class="section-nav" aria-label="本页章节">
+      <div class="section-nav-inner">
+        <span class="section-nav-label">本页内容</span>
+        <a href="#overview"><b>01</b>家长先看 5 件事</a>
+        <a href="#timeline"><b>02</b>申请时间线</a>
+        <a href="#eligibility"><b>03</b>资格判断</a>
+        <a href="#comparison"><b>04</b>6 校 GPA 与排除专业</a>
+        <a href="#campuses"><b>05</b>各校怎么读</a>
+        <a href="#news"><b>06</b>资讯分享</a>
+        <a href="#faq"><b>07</b>常见问题</a>
+        <a href="#consult"><b>08</b>免费咨询</a>
+      </div>
+    </nav>
     <section class="hero">
       <div class="hero-inner">
         <div>
@@ -659,7 +673,7 @@
       </div>
     </section>
 
-    <section class="band">
+    <section id="eligibility" class="band">
       <div class="wrap">
         <div class="section-head">
           <h2>先判断孩子是否有 TAG 资格</h2>
