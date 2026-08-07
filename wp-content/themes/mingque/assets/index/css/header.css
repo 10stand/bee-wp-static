@@ -84,11 +84,23 @@ header {
   margin-top: 24px;
   margin-right: 80px;
 }
+/* 用 gap 排布而非固定宽度：加了第 6 个栏目后，450px 会把各项挤在一起 */
 .h_tab .tab_con {
   display: flex;
   align-items: center;
-  width: 450px;
-  justify-content: space-between;
+  gap: 36px;
+}
+/* 悬停时变色并显示下划线，让家长看得出可以点 */
+.h_tab .tab_con a span {
+  border-bottom: 4px solid transparent;
+  margin-bottom: -4px;
+  box-sizing: border-box;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.h_tab .tab_con a:hover span,
+.h_tab .tab_con a:focus-visible span {
+  color: var(--794EFF, #794EFF);
+  border-bottom-color: #794EFF;
 }
 .h_tab .tab_con span {
   color: var(--000000, #000);
@@ -109,12 +121,12 @@ header {
 }
 .h_tab .tab_right {
   display: flex;
-  padding: 14px 0px 14px 40px;
+  padding: 14px 0px 14px 24px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  /*margin-left: 950px;*/
-  border-left: 1px solid var(--794EFF, #794EFF);
+  /* 间距由 .tab_sep 的外边距控制，让竖线在视觉上两侧等距 */
+  gap: 0;
+  /* 原本这里有一道竖线，现已移到两个链接之间 */
   color: var(--794EFF, #794EFF);
   font-family: PingFang SC;
   font-size: 16px;
@@ -130,24 +142,63 @@ header {
 .h_tab .tab_right a {
   color: #794EFF;
 }
-.h_tab .tab_right .tab_apply {
-  display: flex;
-  align-items: center;
-}
-.h_tab .tab_right .tab_login {
-  display: inline-flex;
-  align-items: center;
+/* 右侧：立即申请 ｜ 用户登录。竖线与原先 tab_right 的左边线等高（47px） */
+.h_tab .tab_right .tab_sep {
+  width: 1px;
+  height: 47px;
   flex-shrink: 0;
-  min-height: 36px;
-  margin-left: 16px;
-  padding: 0 18px;
-  border-radius: 999px;
+  /* 左 20px；右侧只留 6px，加上按钮自身 14px 内边距后，文字两侧同为 20px */
+  margin: 0 6px 0 20px;
   background: var(--794EFF, #794EFF);
+}
+/* 用户登录做成实心按钮与纯文字的立即申请拉开层次 */
+.h_tab .tab_right .tab_login {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--794EFF, #794EFF);
+}
+.h_tab .tab_right .tab_login span {
   color: #fff;
-  white-space: nowrap;
 }
 .h_tab .tab_right .tab_login:hover {
   background: #5f39d6;
+}
+.h_tab .tab_right .tab_login:hover span {
+  color: #fff;
+}
+.h_tab .tab_right a span {
+  margin-right: 0;
+  white-space: nowrap;
+}
+.h_tab .tab_right a:hover span {
+  color: #5f39d6;
+}
+/* 栏目宁可缩小字号，也不折行 */
+.h_tab .tab_con a span {
+  white-space: nowrap;
+}
+.h_tab .tab_ll {
+  min-width: 0;
+}
+.h_tab .tab_right {
+  flex-shrink: 0;
+}
+
+/* 窗口变窄时依次收紧字号与间距，保证一行放得下 */
+@media screen and (max-width: 1400px) {
+  .h_tab .tab_left { margin-right: 48px; }
+  .h_tab .tab_con { gap: 26px; }
+  .h_tab .tab_con span { font-size: 17px; }
+  .h_tab .tab_right { padding-left: 28px; }
+}
+@media screen and (max-width: 1280px) {
+  .h_tab { padding: 0 24px; }
+  .h_tab .tab_left { margin-right: 28px; }
+  .h_tab .tab_con { gap: 18px; }
+  .h_tab .tab_con span { font-size: 16px; }
+  .h_tab .tab_right { padding-left: 20px; font-size: 15px; }
+  .h_tab .tab_left img { width: 170px; height: auto; }
 }
 .hb_box {
   display: none;
@@ -220,18 +271,37 @@ header {
   height: 20px;
   margin-left: 20px;
 }
+/* 手机端同样是「立即申请 ｜ 用户登录」两个文字链接 */
 .hb_tab .hbt_btn {
-  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0;
   height: 32px;
-  padding: 7px 0px 7px 20px;
+  padding: 7px 0px 7px 8px;
   box-sizing: border-box;
-  border-left: 1px solid var(--794EFF, #794EFF);
   color: var(--794EFF, #794EFF);
   font-family: PingFang SC;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  white-space: nowrap;
+}
+.hb_tab .hbt_btn a {
+  color: var(--794EFF, #794EFF);
+}
+.hb_tab .hbt_sep {
+  width: 1px;
+  height: 32px;
+  flex-shrink: 0;
+  margin: 0 4px 0 12px;
+  background: var(--794EFF, #794EFF);
+}
+.hb_tab .hbt_btn a[href*="student_portal"] {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--794EFF, #794EFF);
+  color: #fff;
 }
 .hb_nav {
   display: none;
