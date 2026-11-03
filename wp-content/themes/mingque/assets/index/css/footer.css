@@ -381,3 +381,83 @@ footer .foo_bom .fob_shadow {
   background-color: #fff;
   text-align: center;
 }
+
+/* ── 认证与会员资格（ICEF / NAFSA / NACAC） ── */
+footer {
+  height: auto;
+  padding-bottom: 28px;
+}
+footer .foo_cert {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+footer .foo_cert_tit {
+  color: #000;
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+footer .foo_cert_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer .foo_cert_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(121, 78, 255, 0.25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+}
+footer .foo_cert_item #iasBadge:empty {
+  display: none;
+}
+footer .foo_cert_item #iasBadge img {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+footer .foo_cert_txt {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+footer .foo_cert_txt strong {
+  color: #794EFF;
+  font-family: PingFang SC;
+  font-size: 14px;
+  font-weight: 600;
+}
+footer .foo_cert_txt span {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: PingFang SC;
+  font-size: 12px;
+}
+@media screen and (max-width: 750px) {
+  footer .foo_cert {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  footer .foo_cert_list {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+footer .foo_cert_logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
