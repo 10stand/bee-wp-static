@@ -32,6 +32,17 @@ header {
     display: none;
   }
 }
+/* 跑马灯始终保持一行：窗口变窄时不再折成两行 */
+.h_box {
+  width: max-content;
+  min-width: 300%;
+  white-space: nowrap;
+}
+.h_box.hea_sw .item {
+  float: none;
+  display: inline-flex;
+  vertical-align: middle;
+}
 .h_box .item {
   display: flex;
   justify-content: center;
@@ -199,6 +210,17 @@ header {
   .h_tab .tab_con span { font-size: 16px; }
   .h_tab .tab_right { padding-left: 20px; font-size: 15px; }
   .h_tab .tab_left img { width: 170px; height: auto; }
+}
+/* 751–1024px（小窗口/平板）：缩小 logo 与栏目，并隐藏右上角“立即申请”文字链接（跑马灯里仍有入口），避免栏目与右侧按钮重叠 */
+@media screen and (max-width: 1024px) {
+  .h_tab { padding: 0 16px; }
+  .h_tab .tab_left { width: 130px !important; margin-right: 16px; margin-top: 30px; }
+  .h_tab .tab_left img { width: 130px; height: auto; }
+  .h_tab .tab_con { gap: 12px; }
+  .h_tab .tab_con span { font-size: 15px; }
+  .h_tab .tab_right { padding-left: 12px; }
+  .h_tab .tab_right > a:not(.tab_login),
+  .h_tab .tab_right .tab_sep { display: none; }
 }
 .hb_box {
   display: none;
